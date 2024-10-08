@@ -1,1 +1,6 @@
 # EcoCollect
+
+Deployed Addresses
+
+LockModule#Recylox - 0xe47fCcABcC282fE9A621c88Ad9E8749a38f61C15
+LockModule#Recycle - 0xE006Ef36BA678Ed201587E91200de47255c3d664

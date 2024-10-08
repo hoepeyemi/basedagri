@@ -1,6 +1,6 @@
 import { buildModule } from "@nomicfoundation/hardhat-ignition/modules";
 
-const LockModule = buildModule("LockModule", (m) => {
+const ContractsModule = buildModule("LockModule", (m) => {
 
   const name = "EcoToken";
   const symbol = "ETK";
@@ -8,11 +8,11 @@ const LockModule = buildModule("LockModule", (m) => {
 
   const token = m.contract("Recylox", [name, symbol, initialSupply]);
 
-  const contractAddr = m.contract("Recycle", [name, symbol, initialSupply]);
+  const contractAddr = m.contract("Recycle", [token]);
 
 
 
   return { token, contractAddr };
 });
 
-export default LockModule;
+export default ContractsModule;
