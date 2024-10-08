@@ -30,15 +30,15 @@ const config: HardhatUserConfig = {
   defaultNetwork: 'hardhat',
   etherscan: {
     apiKey: {
-     "base-sepolia": "PLACEHOLDER_STRING"
+     "base-sepolia": process.env.BLOCKSCOUT_KEY as string
     },
     customChains: [
       {
         network: "base-sepolia",
         chainId: 84532,
         urls: {
-         apiURL: "https://api-sepolia.basescan.org/api",
-         browserURL: "https://sepolia.basescan.org"
+         apiURL: "https://base-sepolia.blockscout.com/api",
+         browserURL: "https://base-sepolia.blockscout.com"
         }
       }
     ]
