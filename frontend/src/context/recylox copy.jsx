@@ -5,65 +5,22 @@ import { recyloxABI } from './recylox-abi';
 import PropTypes from 'prop-types';
 import Swal from 'sweetalert2';
 import { recycleABI } from './recycle-abi';
-import { useAccount, useReadContract, useReadContracts } from 'wagmi';
-import { base } from 'wagmi/chains';
-import { getConfig } from '../../wagmi';
+import { useAccount } from 'wagmi';
 
 export const TokenContext = createContext();
 
 export const useToken = () => useContext(TokenContext);
 
-const RECYCLE_TOKEN_CONTRACT = import.meta.env.VITE_RECYCLE_TOKEN_CONTRACT_ADDRESS
-const RECYCLE_CONTRACT = import.meta.env.VITE_RECYCLE_CONTRACT_ADDRESS
 export const TokenProvider = ({ children }) => {
   const account = useAccount()
-  const {data, error, isLoading, refetch} = useReadContracts({
-    config:getConfig(),
-    contracts: [
-      {
-        address: RECYCLE_TOKEN_CONTRACT,
-        abi: recyloxABI,
-        functionName: "name",
-        chainId: base.id
-      },
-      {
-        address: RECYCLE_TOKEN_CONTRACT,
-        abi: recyloxABI,
-        functionName: "symbol",
-      },
-      {
-        address: RECYCLE_TOKEN_CONTRACT,
-        abi: recyloxABI,
-        functionName: "decimals",
-      },
-      {
-        address: RECYCLE_TOKEN_CONTRACT,
-        abi: recyloxABI,
-        functionName: "totalSupply",
-      },
-      {
-        address: RECYCLE_TOKEN_CONTRACT,
-        abi: recyloxABI,
-        functionName: "balanceOf",
-        args: ["0x136FA7A5255500C10aCB8Def1800300272364340"],
-      },
-    
-    ],
-   
-  },)
-console.log({data})
-const name  = data?.[0].result || ''
-const symbol = data?.[1].result || ''
-const decimals = data?.[2].result || 0
-const totalSupply = data?.[3].result || 0
-const accountBalance = data?.[4].result || null;
 
-useEffect(() => {
-  refetch()
-}, [account, refetch])
-
-
+  console.log({account})
   
+  const [name, setName] = useState('');
+  const [symbol, setSymbol] = useState('');
+  const [decimals, setDecimals] = useState(0);
+  const [totalSupply, setTotalSupply] = useState(0);
+  const [accountBalance, setAccountBalance] = useState(null);
   const [loading, setLoading] = useState(false);
   const [provider, setProvider] = useState(null);
   const [contract, setContract] = useState(null);

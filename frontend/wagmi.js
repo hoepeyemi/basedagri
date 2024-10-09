@@ -5,16 +5,17 @@ import { coinbaseWallet } from 'wagmi/connectors';
 export function getConfig() {
   return createConfig({
     chains: [base], 
+    multiInjectedProviderDiscovery:false,
     connectors: [
       coinbaseWallet({
         appName: "OnchainKit",
-        preference: 'smartWalletOnly',
+        preference: 'all',
         version: '4',
       }),
     ],
-    storage: createStorage({
-      storage: cookieStorage,
-    }),
+    // storage: createStorage({
+    //   storage: cookieStorage,
+    // }),
     ssr: true,
     transports: {
       [base.id]: http(), 

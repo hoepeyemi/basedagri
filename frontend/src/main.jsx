@@ -11,17 +11,18 @@ import { WagmiProviders } from './providers/wagmi.jsx';
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  
+  <WagmiProviders>
   <TokenProvider>
     <RecycleProvider>
       <React.StrictMode>
-      <WagmiProviders>
+   
         <BrowserRouter>
             <App />
         </BrowserRouter>
-        </WagmiProviders>
+     
       </React.StrictMode>
     </RecycleProvider>
   </TokenProvider>
+  </WagmiProviders>
 )
 

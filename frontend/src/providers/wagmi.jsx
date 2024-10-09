@@ -9,11 +9,11 @@ import { getConfig } from '../../wagmi.js';
 export function WagmiProviders({
   children,
 }) {
-  const [config] = useState(() => getConfig());
+
   const [queryClient] = useState(() => new QueryClient());
  
   return (
-    <WagmiProvider config={config}>
+    <WagmiProvider config={getConfig()}>
       <QueryClientProvider client={queryClient}>
         <OnchainKitProvider
           apiKey={import.meta.env.VITE_ONCHAINKIT_API_KEY}
