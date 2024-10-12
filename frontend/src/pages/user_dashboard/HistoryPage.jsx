@@ -3,6 +3,8 @@ import Layout from "../../components/dashboard_components/UserDashboardLayout";
 import UserDashboardLayout from "../../components/dashboard_components/UserDashboardLayout";
 import stateGreen from "../../assets/stateGreen.svg";
 import stateRed from "../../assets/stateRed.svg";
+import { useRecycleContract } from "../../context/RecycleContractProvider";
+import { ethers } from "ethers";
 
 const HistoryPage = () => {
   const data = [
@@ -103,6 +105,8 @@ const HistoryPage = () => {
     },
   ];
 
+  const {pickerTransactionHistory} = useRecycleContract();
+  console.log("pickerTransactionHistory =>", pickerTransactionHistory);
   return (
     <UserDashboardLayout
       active_link={"History"}
@@ -117,7 +121,7 @@ const HistoryPage = () => {
           </div>
 
           <div>
-            {data.map((transaction, index) => (
+            {pickerTransactionHistory.map((transaction, index) => (
               <div
                 key={index}>
                 <table className="-m-2 min-w-full table-fixed border-2 border-black bg-gradient-to-r from-green-400 via-green-200 to-white">
@@ -138,8 +142,8 @@ const HistoryPage = () => {
                       <th className="px-2 py-1">
                         <div className="flex justify-end">
                           <img
-                            className={`h-7 w-7 p-2 ${transaction.status === "DECLINED" ? "bg-red-700" : "bg-green-700"}`}
-                            src={transaction.status === "DECLINED" ? stateRed : stateGreen}
+                            className={`h-7 w-7 p-2 ${!transaction[5]  ? "bg-red-700" : "bg-green-700"}`}
+                            src={!transaction[5]  ? stateRed : stateGreen}
                             alt="State Icon Green"
                           />
                         </div>
@@ -148,18 +152,18 @@ const HistoryPage = () => {
                   </thead>
                   <tbody>
                     <tr className="text-primary40 text-xs md:text-lg font-extrabold">
-                      <td className="px-2 py-1 text-center ">{transaction.value}</td>
-                      <td className="px-2 py-1 text-center ">{transaction._weight}</td>
-                      <td className="px-2 py-1 text-center ">{transaction.id}</td>
-                      <td className="px-2 py-1 text-center ">{transaction._address}</td>
+                      <td className="px-2 py-1 text-center ">{ethers.utils.formatEther(transaction[4])}</td>
+                      <td className="px-2 py-1 text-center ">{ethers.utils.formatUnits(transaction[3])} KG</td>
+                      <td className="px-2 py-1 text-center ">{parseInt(transaction[0])}</td>
+                      <td className="px-2 py-1 text-center ">{transaction[1]}</td>
                       <td className="px-2 py-1 items-end text-right">
                         <ul>
                           <li className="text-xs font-bold text-gray-500">{transaction.date}</li>
                           <li
-                            className={`font-extrabold ${transaction.status === "DECLINED" ? "text-red-700" : "text-green-700"
+                            className={`font-extrabold ${!transaction[5]  ? "text-red-700" : "text-green-700"
                               }`}
                           >
-                            {transaction.status}
+                            {transaction[5]? "APPROVED" : "DECLINED"}
                           </li>
                         </ul>
                       </td>

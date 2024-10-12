@@ -117,12 +117,10 @@ const TransactionTab = ({ toggleClose }) => {
 
     const {pickerTransactionHistory} = useRecycleContract();
 
-    console.log({
-        pickerTransactionHistory
-    })
+
     // set toggle state
 
-    return <>
+    return (<>
         <div className='bg-[#005232] w-full h-full flex flex-col justify-start text-white p-4'>
             {/* close button */}
             <button className='flex flex-row justify-end' onClick={toggleClose}>
@@ -138,15 +136,15 @@ const TransactionTab = ({ toggleClose }) => {
       </div>
       <div className="w-full md:w-1/2 lg:w-1/4 items-center p-1">
           <div className="font-sans font-bold uppercase text-black text-[12px]">TOTAL WEIGHT</div>
-          <div className="text-green-800 text-[10px]">{ethers.formatEther(item[3])} KG</div>
+          <div className="text-green-800 text-[10px]">{ethers.utils.formatUnits(item[3])} KG</div>
       </div>
       <div className="w-full md:w-1/2 lg:w-1/4 items-center p-1">
           <div className="font-sans font-bold uppercase text-black text-[12px]">TRANSACTION ID</div>
-          <div className="text-green-800 text-[10px]"><i>XXXX....XXX....XXX...XXX...</i></div>
+          <div className="text-green-800 text-[10px]"><i>{parseInt(item[0])}</i></div>
       </div>
       <div className="w-full md:w-1/2 lg:w-1/4 items-center p-1 text-right">
           <div className="uppercase font-bold text-black p-2 text-xs"><i className="">X</i></div>
-          <div className="text-green-800 text-[8px]"><span><em>5th May 2020, 12:23</em></span></div>
+          {/* <div className="text-green-800 text-[8px]"><span><em>5th May 2020, 12:23</em></span></div> */}
       </div>
   </div>
 ))}
@@ -154,7 +152,7 @@ const TransactionTab = ({ toggleClose }) => {
           
            
         </div>
-    </>
+    </>)
 }
 
 // transfer reccoin tab
