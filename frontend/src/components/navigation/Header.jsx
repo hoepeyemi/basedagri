@@ -7,10 +7,17 @@ import menuIcon from '../../assets/menuGreen.svg'
 import { HeaderData } from '../../data/HeaderData'
 import { MdClose } from "react-icons/md"
 import ConnectWalletButton from "../connections/connect_button";
+import { useAccount } from "wagmi";
+import { useRecycleContract } from "../../context/RecycleContractProvider";
 
 const Header = () => {
+  const account = useAccount()
+  const connectedAccount = account?.address
+  const {account_category } = useRecycleContract()
+  const adminAddress = '';
+  console.log("account_category =>", account_category)
+  // const account_category = '';
 
-    const {connectedAccount, adminAddress, initializeContract, account_category} = useContext(TokenContext)
     // const {account_category} = useRecycle();
     const {pathname} = useLocation();
 
@@ -158,8 +165,9 @@ const Header = () => {
                   
                 </li>
               :
+              <></>
 
-              <ConnectWalletButton/>
+              // <ConnectWalletButton/>
               
                
               }

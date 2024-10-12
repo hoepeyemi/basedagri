@@ -12,17 +12,19 @@ import merchantIcon from '../../assets/merchant.svg'
 import tickIcon from '../../assets/tickIcon.svg'
 import { ethers } from "ethers";
 import Swal from "sweetalert2";
+import { useRecycleContract } from "../../context/RecycleContractProvider";
+import { useTokenContract } from "../../context/TokenProvider";
 
 // validate plastic content
-const ValidatePlasticTab = ({ toggleClose }) => {
+const ValidatePlasticTab = ({ toggleClose,  }) => {
 
-  const {account_category} = useToken();
-  const { isMethodCallLoading,  validatePlastic} = useRecycle();
+  const { account_category,  validatePlastic} = useRecycleContract();
 
   const [transactionID, settransactionID] = useState('');
+  const [loading, setLoading] = useState(false);
   const [isTermsChecked, setisTermsChecked] = useState(false)
 
-  const ValidatePlastic = () => {
+  const ValidatePlastic = async () => {
       if (account_category !== "company") {
         Swal.fire({
           icon: 'error',
@@ -62,7 +64,9 @@ const ValidatePlasticTab = ({ toggleClose }) => {
           }
         })
       } else {
-          validatePlastic(transactionID)
+        setLoading(true);
+         const res = await validatePlastic(transactionID)
+         setLoading(false);
       }
   }
 
@@ -92,7 +96,7 @@ const ValidatePlasticTab = ({ toggleClose }) => {
             className="w-[60%] border-2 border-white rounded-lg p-2 bg-[#006D44] my-6"
             onClick={ValidatePlastic}
         >
-        {isMethodCallLoading ? "Loading..." : "Validate"}
+        {loading ? "Loading..." : "Validate"}
         </button>
     </div>
   );
@@ -100,15 +104,15 @@ const ValidatePlasticTab = ({ toggleClose }) => {
 
 // pay picker tab
 const PayPickerTab = ({ toggleClose }) => {
-
-  const {account_category} = useToken();
-  const { isMethodCallLoading, isMethodCallSuccessful, payPicker} = useRecycle();
+  const [loading, setLoading] = useState(false);
+  const { account_category,  payPicker} = useRecycleContract();
+  // const { isMethodCallLoading, isMethodCallSuccessful, payPicker} = useRecycle();
 
   const [transactionID, settransactionID] = useState('');
   const [payAmount, setPayAmount] = useState(0);
   const [isTermsChecked, setisTermsChecked] = useState(false)
 
-  const PayPicker = () => {
+  const PayPicker = async() => {
       if (account_category !== "company") {
         Swal.fire({
           icon: 'error',
@@ -148,7 +152,10 @@ const PayPickerTab = ({ toggleClose }) => {
           }
         })
       } else {
-          payPicker(transactionID)
+        setLoading(true);
+        const res = await  payPicker(transactionID)
+        setLoading(false);
+         
       }
   }
 
@@ -178,17 +185,18 @@ const PayPickerTab = ({ toggleClose }) => {
             className="w-[60%] border-2 border-white rounded-lg p-2 bg-[#006D44] my-6"
             onClick={PayPicker}
         >
-        {isMethodCallLoading ? "Loading..." : "Pay Picker"}
+        {loading ? "Loading..." : "Pay Picker"}
         </button>
     </div>
   );
 };
 
 // transfer reccoin tab
-const TransferRecyloxTab = ({toggleClose}) => {
+const TransferRecyloxTab = ({toggleClose, account_category}) => {
 
-  const {transferTokens, isMethodCallSuccessful, isMethodCallLoading, account_category} = useToken();
+  const {transferTokens} = useTokenContract();
   // const { account_category} = useRecycle();
+  const [loading, setLoading] = useState(false);
   const [recipientAddress, setRecipientAddress] = useState('');
   const [transferAmount, setTransferAmount] = useState(0);
   const [isTransferChecked, setIsTransferChecked] = useState(false);
@@ -249,7 +257,9 @@ const TransferRecyloxTab = ({toggleClose}) => {
       }
       else {
         const transfer_amt = ethers.utils.parseEther(transferAmount);
+        setLoading(true);
         await transferTokens(recipientAddress, transfer_amt);
+        setLoading(false);
       }
   }
   
@@ -291,7 +301,7 @@ return   <div className="bg-[#005232] w-full mx-auto flex flex-col justify-start
   {/* submit button */}
   <button className="w-[60%] border-2 border-white rounded-lg p-2 bg-[#158B5E] my-6"
   onClick={TransferToken}>
-  {isMethodCallLoading ? "Loading..." : "TRANSFER"}
+  {loading ? "Loading..." : "TRANSFER"}
   </button>
   </div>
 
@@ -299,8 +309,9 @@ return   <div className="bg-[#005232] w-full mx-auto flex flex-col justify-start
 
 const CompanyDashboard = () => {
 
-  const { tokenHolderBalance } = useRecycle()
-  const {recycleContract, picker_count, account_category, companyStruct} = useToken();
+  const { tokenHolderBalance ,picker_count, account_category} = useRecycleContract()
+  {picker_count}
+
 
 
   const [componentToDisplay, setComponentToDisplay] = useState(0);
@@ -314,27 +325,8 @@ const CompanyDashboard = () => {
   };
 
   // 
-  const ToggleBalance = () => {
-    if (!recycleContract) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Error!',
-        text: 'contract not initialized',
-        confirmButtonColor:"#006D44",
-        customClass: {
-            icon: "font-montserrat",
-            title: " font-montserrat text-[20px] text-[#000] font-[600]",
-            text: "font-montserrat, text-[16px] text-[#000] font-[600]",
-        }
-      })
-    } else  {
-        setToggleBalance(!toggleBalance)
-    }
-}
 
-useEffect(() => {
-  console.log("company struct at dashboard => ", companyStruct);
-},[])
+
 
   return <CompanyDashboardLayout active_link={"Dashboard"} dashboard_content={
     <div className=' bg-white font-montserrat border-2 border-[#ECECEC] '>
@@ -359,7 +351,7 @@ useEffect(() => {
                 <div className="flex flex-row justify-between items-center">
                   <img src={merchantIcon} alt="merchant-icon" />
                   <h2 className='text-primary40 font-montserrat font-[500] text-[20px] ml-4'>Balance</h2>
-                  <img src={toggleBalance ? eyesOpenIcon : eyesIcon} alt="eyes-icon" className='h-4 w-4 ml-4 hover:cursor-pointer' onClick={ToggleBalance} />
+                  <img src={toggleBalance ? eyesOpenIcon : eyesIcon} alt="eyes-icon" className='h-4 w-4 ml-4 hover:cursor-pointer' onClick={() =>  setToggleBalance(!toggleBalance)} />
                 </div>
                 {/* balance */}
                 <h1 className='text-[#0D4D00] text-[1.6rem] font-[700] font-montserrat my-4'>{toggleBalance ? `${ethers.utils.formatEther(tokenHolderBalance)} REC` : "XXXXX"}</h1>
@@ -393,9 +385,9 @@ useEffect(() => {
         {/* settings display nav content */}
         <div className='w-full'>
             { 
-                componentToDisplay === 1 ? <ValidatePlasticTab toggleClose={toggleCLose} />
+                componentToDisplay === 1 ? <ValidatePlasticTab toggleClose={toggleCLose} account_category={account_category} />
               : componentToDisplay === 2 ? <PayPickerTab  toggleClose={toggleCLose}/> 
-              : componentToDisplay === 3 ? <TransferRecyloxTab  toggleClose={toggleCLose}/> 
+              : componentToDisplay === 3 ? <TransferRecyloxTab account_category={account_category}  toggleClose={toggleCLose}/> 
               : ""
             }
 

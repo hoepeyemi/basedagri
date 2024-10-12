@@ -4,7 +4,7 @@ import { ethers } from 'ethers';
 import { recycleABI } from './recycle-abi';
 import PropTypes from 'prop-types';
 import Swal from 'sweetalert2';
-import { useToken } from './recylox';
+import { TokenContext, useToken } from './recylox';
 
 export const RecycleContext = createContext();
 
@@ -12,7 +12,7 @@ export const useRecycle = () => useContext(RecycleContext);
 
 export const RecycleProvider = ({ children }) => {
 
-  const {recycleContract, connectedAccount} = useToken();
+  const {recycleContract, connectedAccount} = useToken(TokenContext);
 
   const [companies, setCompanies] = useState([]);
   const [pickers, setPickers] = useState([]);

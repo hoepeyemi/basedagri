@@ -41,6 +41,14 @@ const routes = [
         component: Companies
     },
     {
+        name: 'History',
+        path: '/user-dashboard/history',
+        component: HistoryPage,
+        white_icon: historyWhiteIcon,
+        green_icon: historyGreenIcon,
+        id: "dashboard-history",
+    },
+    {
         name: "Notifications",
         path: '/user-dashboard/notifications',
         component: Notifications,
@@ -56,30 +64,23 @@ const routes = [
         green_icon: settingsGreenIcon,
         id: "dashboard-settings",
     },
-    {
-        name: 'History',
-        path: '/user-dashboard/history',
-        component: HistoryPage,
-        white_icon: historyWhiteIcon,
-        green_icon: historyGreenIcon,
-        id: "dashboard-history",
-    },
-    {
-        name: 'Offers',
-        path: '/user-dashboard/offers',
-        component: OffersPage,
-        white_icon: offersWhiteIcon,
-        green_icon: offersGreenIcon,
-        id: "dashboard-offers",
-    },
-    {
-        name: "Chat",
-        path: '/user-dashboard/chat',
-        white_icon: chatWhiteIcon,
-        green_icon: chatGreenIcon,
-        id: 'dashboard-chat',
-        component: ChatPage
-    }
+
+    // {
+    //     name: 'Offers',
+    //     path: '/user-dashboard/offers',
+    //     component: OffersPage,
+    //     white_icon: offersWhiteIcon,
+    //     green_icon: offersGreenIcon,
+    //     id: "dashboard-offers",
+    // },
+    // {
+    //     name: "Chat",
+    //     path: '/user-dashboard/chat',
+    //     white_icon: chatWhiteIcon,
+    //     green_icon: chatGreenIcon,
+    //     id: 'dashboard-chat',
+    //     component: ChatPage
+    // }
 ];
 
 const renderRoutes = (routes, basePath = '') => {

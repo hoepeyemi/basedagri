@@ -6,10 +6,14 @@ import searchIcon from "../../assets/search.svg";
 import { routes } from "../../routes/dashboard/company";
 import { useToken } from "../../context/recylox";
 import Header from "../navigation/Header";
+import { useAccount } from "wagmi";
+import { useRecycleContract } from "../../context/RecycleContractProvider";
 
 const CompanyDashboardLayout = ({ dashboard_content, active_link }) => {
+  const connectedAccount = useAccount().address;
+  const { account_category } = useRecycleContract();
 
-  const {connectedAccount, account_category} = useToken();
+  // const {connectedAccount, account_category} = useToken();
 
   if (account_category === "company") {
     return (
