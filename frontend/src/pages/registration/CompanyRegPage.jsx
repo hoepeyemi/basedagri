@@ -2,15 +2,24 @@ import { useState } from 'react';
 import Logo from '../../components/logo';
 import { useRecycle } from '../../context/recycle';
 import RegistrationHeader from '../../components/navigation/RegistrationHeader';
-import { useToken } from '../../context/recylox';
+import { RECYCLE_CONTRACT, useToken } from '../../context/recylox';
 import { ethers } from 'ethers';
 import Swal from 'sweetalert2';
+import { getAccount, writeContract } from '@wagmi/core'
+import { recycleABI } from '../../context/recycle-abi';
+import { useAccount } from 'wagmi';
+import { getConfig } from '../../../wagmi';
+import { useNavigate } from 'react-router-dom';
 
 const CompanyRegPage = () => {
 
   const {contract, registerCompany, isMethodCallLoading, 
     isMethodCallSuccessful, account_category }  =  useRecycle();
+    const [loading, setLoading] = useState(false);
   const { connectedAccount } = useToken();
+  const account = useAccount();
+  const navigate = useNavigate();
+
 
 
 const [companyName, setCompanyName] = useState('')
@@ -18,11 +27,11 @@ const [minimumWeightRequirement, setMinimumWeightRequirement] = useState('');
 const [maximumWeightPerKg, setMaximumWeightPerKg] = useState('');
 const [isTermsChecked, setIsTermsChecked] = useState(false)
 
-const RegisterCompany = () => {
+const RegisterCompany = async() => {
 
   console.log("contract reg page => ", contract);
 
-  if(!connectedAccount) {
+  if(!account?.address) {
     Swal.fire({
       icon: 'error',
       title: 'Error!',
@@ -103,10 +112,56 @@ const RegisterCompany = () => {
     })
   }
   else {
-    const minWt = ethers.utils.parseEther(minimumWeightRequirement)
-    const maxPrice =ethers.utils.parseEther(maximumWeightPerKg)
-    console.log("register company arguments => ", minWt, maxPrice);
-    registerCompany(companyName, minWt, maxPrice, true);
+    try {
+      const minWt = ethers.utils.parseEther(minimumWeightRequirement)
+      const maxPrice =ethers.utils.parseEther(maximumWeightPerKg)
+      const result = await writeContract(
+        
+        getConfig(), {
+          
+        account: account?.address,
+        connector:account?.connector,
+        abi:recycleABI,
+        
+        address: RECYCLE_CONTRACT,
+        functionName: 'registerCompany',
+        args: [
+          companyName, minWt, maxPrice, true
+        ],
+      })
+  
+      console.log("register company result => ", result);
+      if(result) {
+        Swal.fire({
+          icon: 'success',
+          title: 'Success!',
+          text: 'Company registered successfully',
+          confirmButtonColor:"#006D44",
+          customClass: {
+              icon: "font-montserrat",
+              title: " font-montserrat text-[20px] text-[#000] font-[600]",
+              text: "font-montserrat, text-[16px] text-[#000] font-[600]",
+          }
+        })
+        navigate('/home')
+      }
+    } catch (error) {
+      console.log(error)
+      Swal.fire({
+        icon: 'error',
+        title: 'Error!',
+        text: 'An error occured during registeration',
+        confirmButtonColor:"#006D44",
+        customClass: {
+            icon: "font-montserrat",
+            title: " font-montserrat text-[20px] text-[#000] font-[600]",
+            text: "font-montserrat, text-[16px] text-[#000] font-[600]",
+        }
+      })
+    } finally{
+      setLoading(false)
+    }
+
 
   }
 }
@@ -193,7 +248,7 @@ const RegisterCompany = () => {
                 <button 
                   className='rounded-[6px] absolute bottom-6 left-36 py-1 px-6 text-[0.6rem] md:text-[0.8rem] lg:text-[1rem] font-medium text-[#fff] bg-[#0D4D00]'
                   onClick={RegisterCompany}>
-                    {isMethodCallLoading ? "Loading..." : isMethodCallSuccessful ? "Company created" : "Register"}
+                    {loading ? "Loading..." : "Register"}
                 </button>
               </div>
             </div>

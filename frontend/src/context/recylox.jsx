@@ -13,18 +13,16 @@ export const TokenContext = createContext();
 
 export const useToken = () => useContext(TokenContext);
 
-const RECYCLE_TOKEN_CONTRACT = import.meta.env.VITE_RECYCLE_TOKEN_CONTRACT_ADDRESS
-const RECYCLE_CONTRACT = import.meta.env.VITE_RECYCLE_CONTRACT_ADDRESS
+export const RECYCLE_TOKEN_CONTRACT = import.meta.env.VITE_RECYCLE_TOKEN_CONTRACT_ADDRESS
+export const RECYCLE_CONTRACT = import.meta.env.VITE_RECYCLE_CONTRACT_ADDRESS
 export const TokenProvider = ({ children }) => {
   const account = useAccount()
   const {data, error, isLoading, refetch} = useReadContracts({
-    config:getConfig(),
     contracts: [
       {
         address: RECYCLE_TOKEN_CONTRACT,
         abi: recyloxABI,
         functionName: "name",
-        chainId: base.id
       },
       {
         address: RECYCLE_TOKEN_CONTRACT,
@@ -51,7 +49,7 @@ export const TokenProvider = ({ children }) => {
     ],
    
   },)
-console.log({data})
+// console.log({data})
 const name  = data?.[0].result || ''
 const symbol = data?.[1].result || ''
 const decimals = data?.[2].result || 0
@@ -101,18 +99,9 @@ const [approveSuccessful, setApproveSuccessful] = useState(false);
     const [pickerTransactionHistory, setPickerTransactionHistory] = useState([]);
   
 
-  useEffect (() => {
-    try {
-      if (window.ethereum.selectedAddress) {
-        initializeContract();
-      }
-    } catch (error) {
-      console.log(error);
-    } 
-
-  }, [])
 
   const initializeContract = async () => {
+  console.log("INITIALIZING CONTRACT")
     try {
       setLoading(true)
       if (window.ethereum) {
@@ -526,7 +515,7 @@ const [approveSuccessful, setApproveSuccessful] = useState(false);
         accountBalance,
         provider, // Include the provider in the context value
         connectedAccount,
-        initializeContract,
+        // initializeContract,
         transferTokensLoading, approveLoading, burnLoading, mintLoading, transferFromLoading,
         transferTokensSuccessful, approveSuccessful, burnSuccessful, mintSuccessful, transferFromSuccessful,
         transferTokens,

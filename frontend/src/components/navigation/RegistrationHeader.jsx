@@ -7,13 +7,19 @@ import menuIcon from '../../assets/menuGreen.svg'
 import { HeaderData } from '../../data/HeaderData'
 import { MdClose } from "react-icons/md"
 import { useRecycle } from "../../context/recycle";
+import { useAccount } from "wagmi";
+import ConnectWalletButton from "../connections/connect_button";
 
 const Header = () => {
+  const account = useAccount()
+  const connectedAccount = account?.address
+  const adminAddress = '';
+  const account_category = '';
 
-  const adminAddress = '0x509D44Bf4E1E5E696eA288eC4fF1114f79a09AC9';
+
 
     // recylox context
-    const {connectedAccount, initializeContract, account_category} = useToken();
+    // const {connectedAccount, initializeContract, account_category} = useToken();
     // recycle context
     // const {account_category, initializeRecycleContract } = useRecycle();
 
@@ -49,7 +55,7 @@ const Header = () => {
 
     // connect wallet
     const ConnectWallet = async () => {
-        initializeContract();
+        // initializeContract();
         // initializeRecycleContract();
     }    
     useEffect(() => {
@@ -209,21 +215,23 @@ const Header = () => {
               
             // </li>
             }
+            <>  </>
           
-            <button 
+            {/* <button 
                 className=" md:hidden rounded-full cursor-pointer font-montserrat text-white bg-primary40 py-2 px-4 text-sm md:text-base lg:ml-[66px] w-[260px]"
                 onClick={() => ConnectWallet()}>
-                {connectedAccount ? `${connectedAccount.slice(0, 5) + "..." + connectedAccount.slice(connectedAccount.length - 5, connectedAccount.length)} `: "Connect Wallet"}
-            </button>
+                {connectedAccount ? `${connectedAccount.slice(0, 5) + "..." + connectedAccount.slice(connectedAccount.length - 5, connectedAccount.length)} `: "Connect Wallets"}
+            </button> */}
               
 
             </ul>
             
-            <button 
+            <ConnectWalletButton/>
+            {/* <button 
                 className="hidden md:block rounded-full cursor-pointer font-montserrat text-white bg-primary40 py-2 px-4 text-sm md:text-base lg:ml-[66px] w-[260px]"
                 onClick={ConnectWallet}>
-                {connectedAccount ? `${connectedAccount.slice(0, 5) + "..." + connectedAccount.slice(connectedAccount.length - 5, connectedAccount.length)}` : "Connect Wallet" }
-            </button>
+                {connectedAccount ? `${connectedAccount.slice(0, 5) + "..." + connectedAccount.slice(connectedAccount.length - 5, connectedAccount.length)}` : "Connect Wallets" }
+            </button> */}
                
     
             
