@@ -116,7 +116,7 @@ const DepositPlasticTab = ({ toggleClose }) => {
 const TransactionTab = ({ toggleClose }) => {
 
     const {pickerTransactionHistory} = useRecycleContract();
-    
+
     console.log({
         pickerTransactionHistory
     })
@@ -130,96 +130,29 @@ const TransactionTab = ({ toggleClose }) => {
             </button>
             <h1 className='font-bold text-2xl my-8'>Transactions</h1>
 
-            <div className="bg-[#ffffff] flex rounded-lg m-2 p-2 flex-wrap">
-                <div className="w-full md:w-1/2 lg:w-1/4 items-center p-1">
-                    <div className="font-sans font-bold uppercase text-black text-[12px]">Total Value</div>
-                    <div className="text-green-800 text-[10px]">55</div>
-                </div>
-                <div className="w-full md:w-1/2 lg:w-1/4 items-center p-1">
-                    <div className="font-sans font-bold uppercase text-black text-[12px]">TOTAL WEIGHT</div>
-                    <div className="text-green-800 text-[10px]">100 KG</div>
-                </div>
-                <div className="w-full md:w-1/2 lg:w-1/4 items-center p-1">
-                    <div className="font-sans font-bold uppercase text-black text-[12px]">TRANSACTION ID</div>
-                    <div className="text-green-800 text-[10px]"><i>XXXX....XXX....XXX...XXX...</i></div>
-                </div>
-                <div className="w-full md:w-1/2 lg:w-1/4 items-center p-1 text-right">
-                    <div className="uppercase font-bold text-black p-2 text-xs"><i className="">X</i></div>
-                    <div className="text-green-800 text-[8px]"><span><em>5th May 2020, 12:23</em></span></div>
-                </div>
-            </div>
-            <div className="bg-[#ffffff] flex rounded-lg m-2 p-2 flex-wrap">
-                <div className="w-full md:w-1/2 lg:w-1/4 items-center p-1">
-                    <div className="font-sans font-bold uppercase text-black text-[12px]">Total Value</div>
-                    <div className="text-green-800 text-[10px]">55</div>
-                </div>
-                <div className="w-full md:w-1/2 lg:w-1/4 items-center p-1">
-                    <div className="font-sans font-bold uppercase text-black text-[12px]">TOTAL WEIGHT</div>
-                    <div className="text-green-800 text-[10px]">100 KG</div>
-                </div>
-                <div className="w-full md:w-1/2 lg:w-1/4 items-center p-1">
-                    <div className="font-sans font-bold uppercase text-black text-[12px]">TRANSACTION ID</div>
-                    <div className="text-green-800 text-[10px]"><i>XXXX....XXX....XXX...XXX...</i></div>
-                </div>
-                <div className="w-full md:w-1/2 lg:w-1/4 items-center p-1 text-right">
-                    <div className="uppercase font-bold text-black p-2 text-xs"><i className="">X</i></div>
-                    <div className="text-green-800 text-[8px]"><span><em>5th May 2020, 12:23</em></span></div>
-                </div>
-            </div>
-            <div className="bg-[#ffffff] flex rounded-lg m-2 p-2 flex-wrap">
-                <div className="w-full md:w-1/2 lg:w-1/4 items-center p-1">
-                    <div className="font-sans font-bold uppercase text-black text-[12px]">Total Value</div>
-                    <div className="text-green-800 text-[10px]">55</div>
-                </div>
-                <div className="w-full md:w-1/2 lg:w-1/4 items-center p-1">
-                    <div className="font-sans font-bold uppercase text-black text-[12px]">TOTAL WEIGHT</div>
-                    <div className="text-green-800 text-[10px]">100 KG</div>
-                </div>
-                <div className="w-full md:w-1/2 lg:w-1/4 items-center p-1">
-                    <div className="font-sans font-bold uppercase text-black text-[12px]">TRANSACTION ID</div>
-                    <div className="text-green-800 text-[10px]"><i>XXXX....XXX....XXX...XXX...</i></div>
-                </div>
-                <div className="w-full md:w-1/2 lg:w-1/4 items-center p-1 text-right">
-                    <div className="uppercase font-bold text-black p-2 text-xs"><i className="">X</i></div>
-                    <div className="text-green-800 text-[8px]"><span><em>5th May 2020, 12:23</em></span></div>
-                </div>
-            </div>
-            <div className="bg-[#ffffff] flex rounded-lg m-2 p-2 flex-wrap">
-                <div className="w-full md:w-1/2 lg:w-1/4 items-center p-1">
-                    <div className="font-sans font-bold uppercase text-black text-[12px]">Total Value</div>
-                    <div className="text-green-800 text-[10px]">55</div>
-                </div>
-                <div className="w-full md:w-1/2 lg:w-1/4 items-center p-1">
-                    <div className="font-sans font-bold uppercase text-black text-[12px]">TOTAL WEIGHT</div>
-                    <div className="text-green-800 text-[10px]">100 KG</div>
-                </div>
-                <div className="w-full md:w-1/2 lg:w-1/4 items-center p-1">
-                    <div className="font-sans font-bold uppercase text-black text-[12px]">TRANSACTION ID</div>
-                    <div className="text-green-800 text-[10px]"><i>XXXX....XXX....XXX...XXX...</i></div>
-                </div>
-                <div className="w-full md:w-1/2 lg:w-1/4 items-center p-1 text-right">
-                    <div className="uppercase font-bold text-black p-2 text-xs"><i className="">X</i></div>
-                    <div className="text-green-800 text-[8px]"><span><em>5th May 2020, 12:23</em></span></div>
-                </div>
-            </div>
-            <div className="bg-[#ffffff] flex rounded-lg m-2 p-2 flex-wrap">
-                <div className="w-full md:w-1/2 lg:w-1/4 items-center p-1">
-                    <div className="font-sans font-bold uppercase text-black text-[12px]">Total Value</div>
-                    <div className="text-green-800 text-[10px]">55</div>
-                </div>
-                <div className="w-full md:w-1/2 lg:w-1/4 items-center p-1">
-                    <div className="font-sans font-bold uppercase text-black text-[12px]">TOTAL WEIGHT</div>
-                    <div className="text-green-800 text-[10px]">100 KG</div>
-                </div>
-                <div className="w-full md:w-1/2 lg:w-1/4 items-center p-1">
-                    <div className="font-sans font-bold uppercase text-black text-[12px]">TRANSACTION ID</div>
-                    <div className="text-green-800 text-[10px]"><i>XXXX....XXX....XXX...XXX...</i></div>
-                </div>
-                <div className="w-full md:w-1/2 lg:w-1/4 items-center p-1 text-right">
-                    <div className="uppercase font-bold text-black p-2 text-xs"><i className="">X</i></div>
-                    <div className="text-green-800 text-[8px]"><span><em>5th May 2020, 12:23</em></span></div>
-                </div>
-            </div>
+{pickerTransactionHistory.map((item, index) => (
+      <div  key={index} className="bg-[#ffffff] flex rounded-lg m-2 p-2 flex-wrap">
+      <div className="w-full md:w-1/2 lg:w-1/4 items-center p-1">
+          <div className="font-sans font-bold uppercase text-black text-[12px]">Total Value</div>
+          <div className="text-green-800 text-[10px]">{ethers.utils.formatEther(item[4])}</div>
+      </div>
+      <div className="w-full md:w-1/2 lg:w-1/4 items-center p-1">
+          <div className="font-sans font-bold uppercase text-black text-[12px]">TOTAL WEIGHT</div>
+          <div className="text-green-800 text-[10px]">{ethers.formatEther(item[3])} KG</div>
+      </div>
+      <div className="w-full md:w-1/2 lg:w-1/4 items-center p-1">
+          <div className="font-sans font-bold uppercase text-black text-[12px]">TRANSACTION ID</div>
+          <div className="text-green-800 text-[10px]"><i>XXXX....XXX....XXX...XXX...</i></div>
+      </div>
+      <div className="w-full md:w-1/2 lg:w-1/4 items-center p-1 text-right">
+          <div className="uppercase font-bold text-black p-2 text-xs"><i className="">X</i></div>
+          <div className="text-green-800 text-[8px]"><span><em>5th May 2020, 12:23</em></span></div>
+      </div>
+  </div>
+))}
+         
+          
+           
         </div>
     </>
 }
