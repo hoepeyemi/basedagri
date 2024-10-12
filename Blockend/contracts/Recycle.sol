@@ -40,6 +40,7 @@ contract Recycle is Ownable(msg.sender) {
     }
 
     struct Company {
+        address companyAddress;
         string name;
         uint256 minWeightRequirement;
         uint256 maxPricePerKg;
@@ -47,6 +48,7 @@ contract Recycle is Ownable(msg.sender) {
     }
 
     struct Picker {
+        address pickerAddress;
         string name;
         string email;
         uint256 weightDeposited;
@@ -278,6 +280,7 @@ contract Recycle is Ownable(msg.sender) {
             "Recycle: Invalid minimum weight requirement"
         );
         Company memory newCompany = Company(
+            msg.sender,
             _name,
             _minWeightRequirement,
             _maxPricePerKg,
@@ -431,7 +434,7 @@ contract Recycle is Ownable(msg.sender) {
             bytes(pickers[msg.sender].name).length == 0,
             "Recycle: Picker already registered"
         );
-        Picker memory newPicker = Picker(_name, _email, 0, new uint256[](0));
+        Picker memory newPicker = Picker(msg.sender,_name, _email, 0, new uint256[](0));
         pickers[msg.sender] = newPicker;
         pickerAddresses.push(msg.sender);
         emit PickerRegistered(msg.sender, _name, _email);
