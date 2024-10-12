@@ -9,11 +9,13 @@ import Deposit from '../../pages/company_dashboard/Deposit';
 import { routes } from '../../routes/dashboard/user.jsx'
 import { useToken } from '../../context/recylox';
 import Header from '../navigation/Header';
+import { useAccount } from 'wagmi';
+import { useRecycleContract } from '../../context/RecycleContractProvider.jsx';
 
 const UserDashboardLayout = ({dashboard_content, active_link}) => {
 
-  const {account_category, connectedAccount} = useToken()
-
+  const connectedAccount = useAccount().address;
+  const { account_category = "picker" } = useRecycleContract();
   if (account_category === "picker") {
     return (
       <div className='relative h-[1025px] min-w-[968px] container mx-auto'>
@@ -53,7 +55,7 @@ const UserDashboardLayout = ({dashboard_content, active_link}) => {
             </svg>
 
             <figcaption className='mt-1 text-white'>
-              Welcome {connectedAccount.slice(0, 5) + "..." + connectedAccount.slice(connectedAccount.length - 5, connectedAccount.length) }
+              Welcome {connectedAccount?.slice(0, 5) + "..." + connectedAccount?.slice(connectedAccount?.length - 5, connectedAccount?.length) }
             </figcaption>
           </div>
 

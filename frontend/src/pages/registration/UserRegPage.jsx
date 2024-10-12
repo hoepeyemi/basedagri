@@ -5,16 +5,25 @@ import { useRecycle } from "../../context/recycle";
 import { useNavigate } from "react-router-dom";
 import { useToken } from "../../context/recylox";
 import Swal from "sweetalert2";
-
+import { RECYCLE_CONTRACT } from "../../utils";
+import { recycleABI } from "../../context/recycle-abi";
+import { getConfig } from "../../../wagmi";
+import {  writeContract } from '@wagmi/core'
+import { useRecycleContract } from "../../context/RecycleContractProvider";
+import { useAccount } from "wagmi";
 const UserRegPage = () => {
 
+  const { account_category }  =  useRecycleContract();
+    const [loading, setLoading] = useState(false);
+  const account = useAccount();
   const navigate = useNavigate()
+  const connectedAccount = account?.address
 
-  const {
-    registerPicker,  pickers, companies, 
-    isMethodCallLoading, isMethodCallSuccessful
-  }  = useRecycle();
-  const {recycleContract, account_category, connectedAccount} = useToken();
+  // const {
+  //   registerPicker,  pickers, companies, 
+  //   isMethodCallLoading, isMethodCallSuccessful
+  // }  = useRecycle();
+
 
   const [userName, setUserName] = useState('');
   const [userEmail, setUserEmail] = useState('');
@@ -22,11 +31,11 @@ const UserRegPage = () => {
 
 
   useEffect(()=>{
-    console.log("companies =>", companies);
+    
     console.log("account category => ", account_category);
   }, [])
 
-  const RegisterPicker = () => {
+  const RegisterPicker = async() => {
 
     const email_regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -101,29 +110,57 @@ const UserRegPage = () => {
       });
     }
      else {
-      registerPicker(userName, userEmail);
-      
+      try {
+        setLoading(true);
+      const result = await writeContract(
+        
+        getConfig(), {
+          
+        account: account?.address,
+        connector:account?.connector,
+        abi:recycleABI,
+        
+        address: RECYCLE_CONTRACT,
+        functionName: 'registerPicker',
+        args: [
+          userName, userEmail
+        ],
+      })
 
-      // if (isMethodCallSuccessful) {
-      //   Swal.fire({
-      //     icon: 'success',
-      //     title: 'Success!',
-      //     text: 'Picker created successfully!',
-      //     confirmButtonColor:"#006D44",
-      //     customClass: {
-      //         icon: "font-montserrat",
-      //         title: " font-montserrat text-[20px] text-[#000] font-[600]",
-      //         text: "font-montserrat, text-[16px] text-[#000] font-[600]",
-      //     }
-      //   }).then((result) => {
-      //     if (result.isConfirmed) {
-      //       navigate('/user-dashboard')
-      //     }
-      //   })
-      // }
-    }
+
+        Swal.fire({
+          icon: 'success',
+          title: 'Success!',
+          text: 'Picker created successfully!',
+          confirmButtonColor:"#006D44",
+          customClass: {
+              icon: "font-montserrat",
+              title: " font-montserrat text-[20px] text-[#000] font-[600]",
+              text: "font-montserrat, text-[16px] text-[#000] font-[600]",
+          }
+        })
+            navigate('/user-dashboard')      
+
+    } catch (error) {
+      console.log(error)
+      Swal.fire({
+        icon: 'error',
+        title: 'Error!',
+        text: 'An error occured during registeration',
+        confirmButtonColor:"#006D44",
+        customClass: {
+            icon: "font-montserrat",
+            title: " font-montserrat text-[20px] text-[#000] font-[600]",
+            text: "font-montserrat, text-[16px] text-[#000] font-[600]",
+        }
+      })
+    
+  } finally{
+    setLoading(false)
   }
 
+  }
+  }
   return (
     <div className='container mx-auto'>
       <RegistrationHeader/>
@@ -196,7 +233,7 @@ const UserRegPage = () => {
               <button className='rounded-[6px] absolute bottom-20 left-16 py-1 px-6 text-[0.6rem] md:text-[0.8rem] lg:text-[1rem] font-medium text-[#fff] bg-[#0D4D00]'
                 onClick={RegisterPicker}
               >
-                {isMethodCallLoading ? "Loading..." : "Register"}
+                {loading ? "Loading..." : "Register"}
               </button>
             </div>
           </div>

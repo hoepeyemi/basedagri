@@ -311,7 +311,7 @@ const CompanyDashboard = () => {
 
   const { tokenHolderBalance ,picker_count, account_category} = useRecycleContract()
   {picker_count}
-  const {recycleContract, companyStruct} = useToken();
+
 
 
   const [componentToDisplay, setComponentToDisplay] = useState(0);
@@ -325,23 +325,7 @@ const CompanyDashboard = () => {
   };
 
   // 
-  const ToggleBalance = () => {
-    if (!recycleContract) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Error!',
-        text: 'contract not initialized',
-        confirmButtonColor:"#006D44",
-        customClass: {
-            icon: "font-montserrat",
-            title: " font-montserrat text-[20px] text-[#000] font-[600]",
-            text: "font-montserrat, text-[16px] text-[#000] font-[600]",
-        }
-      })
-    } else  {
-        setToggleBalance(!toggleBalance)
-    }
-}
+
 
 
   return <CompanyDashboardLayout active_link={"Dashboard"} dashboard_content={

@@ -10,18 +10,18 @@ import { ethers } from 'ethers';
 import { TokenContext } from '../../context/recylox';
 import { useRecycle } from '../../context/recycle';
 import Swal from 'sweetalert2'
+import { useRecycleContract } from '../../context/RecycleContractProvider';
+import { useTokenContract } from '../../context/TokenProvider';
 
 // deposit plastic content
 const DepositPlasticTab = ({ toggleClose }) => {
-
-    const {depositPlastic,  isMethodCallLoading, isMethodCallSuccessful} = useRecycle();
-
+    const { account_category,  depositPlastic} = useRecycleContract();
+    const [loading, setLoading] = useState(false);
     const [companyAddress, setCompanyAddress] = useState('');
     const [plasticWeight, setPlasticWeight] = useState('');
     const [isTermsChecked, setisTermsChecked] = useState(false)
 
-    const DepositPlastic = () => {
-
+    const DepositPlastic =  async() => {
         if (!companyAddress) {
             Swal.fire({
                 icon: 'error',
@@ -60,15 +60,17 @@ const DepositPlasticTab = ({ toggleClose }) => {
                 }
               })
         } else {
+            setLoading(true);
             const plastic_weight = ethers.utils.parseEther(plasticWeight)
-            depositPlastic(companyAddress, plastic_weight)
-            if (isMethodCallSuccessful) {
-                ` ${Swal.fire({
-                    icon: 'success',
-                    title: 'Success!',
-                    text: 'Plastic deposited successfully!',
-                  })}`
-            }
+          await  depositPlastic(companyAddress, plastic_weight)
+            setLoading(false);
+            // if (isMethodCallSuccessful) {
+            //     ` ${Swal.fire({
+            //         icon: 'success',
+            //         title: 'Success!',
+            //         text: 'Plastic deposited successfully!',
+            //       })}`
+            // }
         }
     }
 
@@ -104,7 +106,7 @@ const DepositPlasticTab = ({ toggleClose }) => {
                 className="w-[60%] border-2 border-white rounded-lg p-2 bg-[#006D44] my-6"
                 onClick={DepositPlastic}
             >
-                 {isMethodCallLoading ? "Loading..."  : "Deposit Plastic" }
+                 {loading ? "Loading..."  : "Deposit Plastic" }
             </button>
         </div>
     );
@@ -112,6 +114,12 @@ const DepositPlasticTab = ({ toggleClose }) => {
 
 // transaction tab content
 const TransactionTab = ({ toggleClose }) => {
+
+    const {pickerTransactionHistory} = useRecycleContract();
+    
+    console.log({
+        pickerTransactionHistory
+    })
     // set toggle state
 
     return <>
@@ -217,8 +225,9 @@ const TransactionTab = ({ toggleClose }) => {
 }
 
 // transfer reccoin tab
-const TransferRecyloxTab = ({toggleClose,  transferLoading,  TransferToken}) => {
-
+const TransferRecyloxTab = ({toggleClose, account_category}) => { 
+     const {transferTokens} = useTokenContract();
+const [loading, setLoading] = useState(false);
     const [recipientAddress, setRecipientAddress] = useState('');
     const [transferAmount, setTransferAmount] = useState(0);
     const [isTransferChecked, setIsTransferChecked] = useState(false);
@@ -265,8 +274,10 @@ const TransferRecyloxTab = ({toggleClose,  transferLoading,  TransferToken}) => 
               })
         }
         else {
-            const transfer_amt = ethers.utils.parseEther(transferAmount)
-           await TransferToken(recipientAddress, transfer_amt)
+            const transfer_amt = ethers.utils.parseEther(transferAmount);
+            setLoading(true);
+            await transferTokens(recipientAddress, transfer_amt);
+            setLoading(false);
         }
     }
     
@@ -306,16 +317,16 @@ const TransferRecyloxTab = ({toggleClose,  transferLoading,  TransferToken}) => 
     {/* submit button */}
     <button className="w-[60%] border-2 border-white rounded-lg p-2 bg-[#158B5E] my-6"
     onClick={transferToken}>
-    {transferLoading ? "Loading..." : "TRANSFER"}
+    {loading ? "Loading..." : "TRANSFER"}
     </button>
     </div>
 
 }
 
 const UserDashboard = () => {
+    const { tokenHolderBalance ,picker_count, account_category} = useRecycleContract()
+    {picker_count}
 
-    const {contract, transferTokens} = useContext(TokenContext);
-    const {tokenHolderBalance, isMethodCallLoading, isMethodCallSuccessful} = useRecycle();
     // Component to Display for dashboard
     const [componentToDisplay, setComponentToDisplay] = useState(0);
     const [toggleBalance, setToggleBalance] = useState(false);
@@ -326,15 +337,7 @@ const UserDashboard = () => {
         setComponentToDisplay(0);
     };
 
-    const ToggleBalance = () => {
-        if (!contract) {
-            alert("contract not initialized")
-        } else  {
-            setToggleBalance(!toggleBalance)
-            // const account_balance = ethers.utils.formatEther(tokenHolderBalance.toString());
-            // setBalance(account_balance);
-        }
-    }
+
 
     return (
         <UserDashboardLayout active_link={'Dashboard'} dashboard_content={
@@ -357,7 +360,7 @@ const UserDashboard = () => {
                                     <path d="M10 0.5L0 5.5V7.5H20V5.5L10 0.5Z" fill="green"/>
                                 </svg>
                                 <h2 className='text-primary40 font-montserrat font-black text-[1.6rem] ml-4'>Balance</h2>
-                                <img src={toggleBalance ? eyesOpenIcon : eyesIcon} alt="eyes-icon" className='h-4 w-4 ml-20 hover:cursor-pointer' onClick={ToggleBalance} />
+                                <img src={toggleBalance ? eyesOpenIcon : eyesIcon} alt="eyes-icon" className='h-4 w-4 ml-20 hover:cursor-pointer' onClick={()=>setToggleBalance(!toggleBalance) } />
                             </div>
                             <h1 className='text-[#0D4D00] text-[1.6rem] font-[700] font-montserrat my-4'>{toggleBalance ? ethers.utils.formatEther(tokenHolderBalance) : "XXXXX"}</h1>
                             {/* settings nav items */}
@@ -384,10 +387,7 @@ const UserDashboard = () => {
                                 /> 
                                 : componentToDisplay === 2 ? <TransactionTab toggleClose={toggleCLose}/> 
                                 : componentToDisplay === 3 ? <TransferRecyloxTab 
-                                    toggleClose={toggleCLose}
-                                    TransferToken={transferTokens}
-                                    transferLoading={isMethodCallLoading}
-                                    isTransferSuccessful={isMethodCallSuccessful}
+                                account_category={account_category}  toggleClose={toggleCLose}
                                 /> 
                                 : ""
                             }

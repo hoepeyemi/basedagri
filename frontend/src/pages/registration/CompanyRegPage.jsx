@@ -5,18 +5,17 @@ import RegistrationHeader from '../../components/navigation/RegistrationHeader';
 import { RECYCLE_CONTRACT, useToken } from '../../context/recylox';
 import { ethers } from 'ethers';
 import Swal from 'sweetalert2';
-import { getAccount, writeContract } from '@wagmi/core'
+import {  writeContract } from '@wagmi/core'
 import { recycleABI } from '../../context/recycle-abi';
 import { useAccount } from 'wagmi';
 import { getConfig } from '../../../wagmi';
 import { useNavigate } from 'react-router-dom';
+import { useRecycleContract } from '../../context/RecycleContractProvider';
 
 const CompanyRegPage = () => {
 
-  const {contract, registerCompany, isMethodCallLoading, 
-    isMethodCallSuccessful, account_category }  =  useRecycle();
+  const { account_category }  =  useRecycleContract();
     const [loading, setLoading] = useState(false);
-  const { connectedAccount } = useToken();
   const account = useAccount();
   const navigate = useNavigate();
 
@@ -29,7 +28,6 @@ const [isTermsChecked, setIsTermsChecked] = useState(false)
 
 const RegisterCompany = async() => {
 
-  console.log("contract reg page => ", contract);
 
   if(!account?.address) {
     Swal.fire({

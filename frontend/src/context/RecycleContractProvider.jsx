@@ -12,8 +12,10 @@ export const RecycleContractContext = createContext()
 export const useRecycleContract = () => useContext(RecycleContractContext);
 const RecycleContractProvider = ({children}) => {
   const account = useAccount()
-  const [companyTransactionHistory, setCompanyTransactionHistory] = useState([])
-  const [pickerTransactionHistory, setPickerTransactionHistory] = useState([])
+  // const [companyTransactionHistory, setCompanyTransactionHistory] = useState([])
+  // const [pickerTransactionHistory, setPickerTransactionHistory] = useState([])
+
+
 
   const {data, error, isLoading, refetch} = useReadContracts({
     contracts: [
@@ -68,22 +70,38 @@ const totalTransaction = data?.[3].result || 0
 const picker = data?.[4].result || null
 const company = data?.[5].result || null
 let account_category 
-
-if(picker && picker){
+console.log({
+  picker_count,
+  company_count,
+  tokenHolderBalance,
+  totalTransaction,
+  picker,
+  company,
+})
+if(picker && picker?.name){
   account_category = "picker"
 }
-if(company ){
+if(company && company?.name){
   account_category = "company"
 }
-
+let pickerTransactionHistory = []
+let companyTransactionHistory = []
 if (data && !error){
   for (let index = 0; index < totalTransaction; index++) {
- readContract(config, {
+ readContract(getConfig(), {
       abi: recycleABI,
       address: RECYCLE_CONTRACT,
       functionName: 'transactions',
       args: [index],
     }).then((result) => {
+      const company_address = result[1].toLowerCase();
+        const picker_address = result[2].toLowerCase();
+        if (company_address === account?.address ) {
+    companyTransactionHistory.push(result);
+        }
+        if ( account?.address) {
+          pickerTransactionHistory.push(result)
+        }
       console.log(`transaction struct ${index} => `, result);
     }).catch((error) => {
       console.error('Failed to fetch transaction details:', error);
@@ -157,6 +175,53 @@ const payPicker = useCallback(async (transactionId) => {
   }
 }, [account?.address, account?.connector])
 
+const depositPlastic = useCallback(async (companyAddress, weight) => {
+  try {
+    const result = await writeContract( 
+      getConfig(), {
+      account: account?.address,
+      connector:account?.connector,
+      abi:recycleABI,
+      address: RECYCLE_CONTRACT,
+      functionName: 'depositPlastic',
+      args: [
+        companyAddress, weight
+      ],
+    })
+
+    
+    console.log('Plastic deposited successfully!');
+    // Additional logic or UI updates after successful deposit
+    Swal.fire({
+      icon: 'success',
+      title: 'Success!',
+      text: 'Plastic deposited successfully!',
+      confirmButtonColor:"#006D44",
+      // preConfirm: () => {window.location.reload()},
+      customClass: {
+          icon: "font-montserrat",
+          title: " font-montserrat text-[20px] text-[#000] font-[600]",
+          text: "font-montserrat, text-[16px] text-[#000] font-[600]",
+      }
+    })
+    return result
+  } catch (error) {
+    console.error('Failed to deposit plastic:', error);
+
+    Swal.fire({
+      icon: 'error',
+      title: 'Error!',
+      text: `Failed to validate plastic: ${error}`,
+      confirmButtonColor:"#006D44",
+      customClass: {
+          icon: "font-montserrat",
+          title: " font-montserrat text-[20px] text-[#000] font-[600]",
+          text: "font-montserrat, text-[16px] text-[#000] font-[600]",
+      }
+    })
+  }
+}, [account?.address, account?.connector])
+
 const validatePlastic = useCallback(async (transactionId) => {
   try {
     const result = await writeContract( 
@@ -216,7 +281,8 @@ const validatePlastic = useCallback(async (transactionId) => {
       tokenHolderBalance,
       totalTransaction,
       payPicker,
-      validatePlastic
+      validatePlastic,
+      depositPlastic
     }}>{children}</RecycleContractContext.Provider>
   )
 }
