@@ -63,8 +63,8 @@ npx hardhat verify --network base-sepolia <deployed address>
 
 Deployed Addresses
 
-EcoCollectModule#Recylox - 0xacFfd04f690a7D718A23C07276c2bFCcF2Ee7E7A
-EcoCollectModule#Recycle - 0xD0BFe7253aB8EdCe6Fb46Eba473e13Ee9336aE82
+**Recylox** - 0xacFfd04f690a7D718A23C07276c2bFCcF2Ee7E7A
+**Recycle** - 0xD0BFe7253aB8EdCe6Fb46Eba473e13Ee9336aE82
 
 - **Recylox**: [0xacFfd04f690a7D718A23C07276c2bFCcF2Ee7E7A](https://base-sepolia.blockscout.com/address/0x7042153d890F545E1fACaea4363DA2A861e546fC#code)
 - **Recycle**: [0xD0BFe7253aB8EdCe6Fb46Eba473e13Ee9336aE82](https://base-sepolia.blockscout.com/address/0xD0BFe7253aB8EdCe6Fb46Eba473e13Ee9336aE82#code)
