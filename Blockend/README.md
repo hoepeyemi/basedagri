@@ -61,9 +61,14 @@ npx hardhat verify --network base-sepolia <deployed address>
 
 ### Deployed Addresses
 
-- **Recylox**: [0x7042153d890F545E1fACaea4363DA2A861e546fC](https://base-sepolia.blockscout.com/address/0x7042153d890F545E1fACaea4363DA2A861e546fC#code)
-- **Recycle**: [0x546B682833063BA94b0de6482f35Ea0e14260a65](https://base-sepolia.blockscout.com/address/0x546B682833063BA94b0de6482f35Ea0e14260a65#code)
+Deployed Addresses
+
+EcoCollectModule#Recylox - 0xacFfd04f690a7D718A23C07276c2bFCcF2Ee7E7A
+EcoCollectModule#Recycle - 0xD0BFe7253aB8EdCe6Fb46Eba473e13Ee9336aE82
+
+- **Recylox**: [0xacFfd04f690a7D718A23C07276c2bFCcF2Ee7E7A](https://base-sepolia.blockscout.com/address/0x7042153d890F545E1fACaea4363DA2A861e546fC#code)
+- **Recycle**: [0xD0BFe7253aB8EdCe6Fb46Eba473e13Ee9336aE82](https://base-sepolia.blockscout.com/address/0xD0BFe7253aB8EdCe6Fb46Eba473e13Ee9336aE82#code)
 
 Successfully verified contracts:
-- [Recylox](https://base-sepolia.blockscout.com/address/0x7042153d890F545E1fACaea4363DA2A861e546fC#code)
-- [Recycle](https://base-sepolia.blockscout.com/address/0x546B682833063BA94b0de6482f35Ea0e14260a65#code)
+- [Recylox](https://base-sepolia.blockscout.com/address/0xacFfd04f690a7D718A23C07276c2bFCcF2Ee7E7A#code)
+- [Recycle](https://base-sepolia.blockscout.com/address/0xD0BFe7253aB8EdCe6Fb46Eba473e13Ee9336aE82#code)

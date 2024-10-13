@@ -623,4 +623,22 @@ contract Recycle is Ownable(msg.sender) {
         emit PickerPaid(msg.sender, _pickerAddress, amount);
         return true;
     }
+
+    // Function to get all companyadresses associated with their addresses
+    function getAllCompanyAddresses() public view returns (address[] memory) {
+        return companyAddresses;
+    }
+
+    // Function to get all companies associated with their addresses
+    function getAllCompanies() public view returns (Company[] memory) {
+        uint256 length = companyAddresses.length;
+        Company[] memory allCompanies = new Company[](length);
+
+        for (uint256 i = 0; i < length; i++) {
+            address companyAddress = companyAddresses[i];
+            allCompanies[i] = companies[companyAddress];
+        }
+
+        return allCompanies;
+    }
 }
