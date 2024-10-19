@@ -21,4 +21,4 @@ const [wallet, setWallet] = useState(null);
 
   const handleWalletConnect = () => {
     setWallet(window.ethereum);
-  };
+  };}

@@ -17,13 +17,13 @@ export const howItworks =
 
 
     {
-        title: 'Recylox Rewards Calculation:', 
-        desc: ['Based on the weight and type of recyclable materials, Recylox rewards are calculated.', 'A predetermined conversion rate is applied to determine the number of Recyloxs earned.']
+        title: 'Ecocollect Rewards Calculation:', 
+        desc: ['Based on the weight and type of recyclable materials, Ecocollect rewards are calculated.', 'A predetermined conversion rate is applied to determine the number of Ecocollect earned.']
     },
 
     {
-        title: 'Recylox Distribution:', 
-        desc: ['The earned Recyloxs are credited to the user', 'Users can access their Recylox balance and track their earnings.']
+        title: 'Ecocollect Distribution:', 
+        desc: ['The earned Ecocollect are credited to the user', 'Users can access their Ecocollect balance and track their earnings.']
     },
 
 

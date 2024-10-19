@@ -1,9 +1,10 @@
-import { useContext, useState } from 'react'
-import { TokenContext } from '../context/recylox'
+import { useState } from 'react'
+import { useTokenContract } from '../context/TokenProvider'
 
 const Test = () => {
 
-  const {loading, transferTokens} = useContext(TokenContext)
+  const {transferTokens} = useTokenContract()
+  const [loading, setloading] = useState(false)
 
   const [userAddress, setUserAddress] = useState('')
   const [tokenAmt, setTokenAmt] = useState(0)

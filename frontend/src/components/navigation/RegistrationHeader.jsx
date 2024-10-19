@@ -1,14 +1,12 @@
-import { useContext, useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { MdClose } from "react-icons/md";
 import { Link, useLocation } from "react-router-dom";
-import dropdown from '../../assets/dropdown.svg'
-import Logo from '../logo'
-import { TokenContext, useToken } from '../../context/recylox'
-import menuIcon from '../../assets/menuGreen.svg'
-import { HeaderData } from '../../data/HeaderData'
-import { MdClose } from "react-icons/md"
-import { useRecycle } from "../../context/recycle";
 import { useAccount } from "wagmi";
+import dropdown from '../../assets/dropdown.svg';
+import menuIcon from '../../assets/menuGreen.svg';
+import { HeaderData } from '../../data/HeaderData';
 import ConnectWalletButton from "../connections/connect_button";
+import Logo from '../logo';
 
 const Header = () => {
   const account = useAccount()
@@ -18,16 +16,10 @@ const Header = () => {
 
 
 
-    // recylox context
-    // const {connectedAccount, initializeContract, account_category} = useToken();
-    // recycle context
-    // const {account_category, initializeRecycleContract } = useRecycle();
 
     const {pathname} = useLocation();
 
-    // console.log('pickerStruct => ', pickerStruct);
-
-    // const [selectedOption, setSelectedOption] = useState('');
+  
     const [toggle_menu, setToggleMenu] = useState(false);
     const [showRegisterDropdown, setShowRegisterDropdown] = useState(false);
     const [showHomeDropDown, setShowHomeDropDown] = useState(false);
@@ -76,7 +68,7 @@ const Header = () => {
         <div className="w-12 h-12">
           <Link to={"/"}>
             {" "}
-            <Logo fill="#0D4D00" h="48" w="48" />
+            <Logo />
           </Link>
         </div>
 

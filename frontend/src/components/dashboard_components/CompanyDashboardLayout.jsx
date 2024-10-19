@@ -1,19 +1,16 @@
-import Logo from "../logo";
-import menuIcon from "../../assets/menu-ic.svg";
 import { Link } from "react-router-dom";
-import { DashboardFooterData } from "../../data/DashboardFooterData";
-import searchIcon from "../../assets/search.svg";
-import { routes } from "../../routes/dashboard/company";
-import { useToken } from "../../context/recylox";
-import Header from "../navigation/Header";
 import { useAccount } from "wagmi";
+import menuIcon from "../../assets/menu-ic.svg";
+import searchIcon from "../../assets/search.svg";
 import { useRecycleContract } from "../../context/RecycleContractProvider";
+import { DashboardFooterData } from "../../data/DashboardFooterData";
+import { routes } from "../../routes/dashboard/company";
+import Logo from "../logo";
+import Header from "../navigation/Header";
 
 const CompanyDashboardLayout = ({ dashboard_content, active_link }) => {
   const connectedAccount = useAccount().address;
   const { account_category } = useRecycleContract();
-
-  // const {connectedAccount, account_category} = useToken();
 
   if (account_category === "company") {
     return (
@@ -265,8 +262,8 @@ const CompanyDashboardLayout = ({ dashboard_content, active_link }) => {
         <main className="absolute w-[80%] h-full right-0 bottom-4 px-16 bg-[#F8F9FB]">
           {/* dash board header */}
           <header className="my-4 border-black-700 flex flex-row justify-between items-center">
-            <div className="w-46 h-46 items-center ">
-              <Link to={'/'}><Logo fill='#0D4D00' w='56' h='56' /></Link>
+            <div className="w-12 h-12 items-center ">
+              <Link to={'/'}><Logo /></Link>
             </div>
             <div>
               <h1 className="text-[1rem] md:text-[1rem] lg:text-[1.2rem] text-[#0D4D00] font-bold">COMPANY DASHBOARD</h1>

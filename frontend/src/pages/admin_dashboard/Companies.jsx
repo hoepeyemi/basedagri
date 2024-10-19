@@ -4,19 +4,19 @@ import AdminDashboardLayout from '../../components/dashboard_components/AdminDas
 import { CompanyData } from '../../data/CompanyData'
 import { useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
+import { useRecycleContract } from '../../context/RecycleContractProvider'
 
 const PaginatedContent = ({currentData}) => {
     return <table className='w-full mt-10 '>
-     <tbody>
-     {
-        currentData.map((item, index) =>
-         <tr className='w-full h-[4rem] text-[16px] justify-start align-bottom border-b-2 border-[#005232]' key={index} >
-             <td className='text-[#005232] w-1/3'>{item.title}</td>
-             <td className={`italic w-1/3 ${item.status == "active" ? 'text-[#005232]' : 'text-[#A5DAEF]'}`}>{item.status}</td>
-             <td className='italic w-1/3 text-[#005232]'>
-                 <Link to={`${item.link}`}>Learn more</Link>
-             </td>
-         </tr>
+    <tbody>
+    {
+       currentData.map((item, index) =>
+        <tr className='w-full h-[4rem] text-[16px] justify-start align-bottom border-b-2 border-[#005232]' key={index} >
+             <td className='text-[#005232] w-2/3'>{item.companyAddress}</td>
+            <td className='text-[#005232] w-1/3'>{item.name}</td>
+            <td className={`italic w-1/3 ${item.active == "active" ? 'text-[#005232]' : 'text-[#A5DAEF]'}`}>{item.active? "active" : "inactive"}</td>
+          
+        </tr>
         )
     }
      </tbody>
@@ -71,7 +71,7 @@ const PaginationComponent = ({numberOfPages, current_page, set_current_page}) =>
 }
 
 const Companies = () => {
-
+    const {companies:CompanyData} = useRecycleContract()
     // const DATA_PER_PAGE = 6;
 
     // fetch and save data using useEffect and setCompanyData

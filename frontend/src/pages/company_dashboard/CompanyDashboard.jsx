@@ -1,19 +1,18 @@
-import { useEffect, useState } from "react";
-import {Link} from "react-router-dom";
-import CompanyDashboardLayout from "../../components/dashboard_components/CompanyDashboardLayout"
-import { CompanyDashboardData } from "../../data/DepositTransactionData";
-import closeIcon from "../../assets/close.svg";
-import { useToken } from "../../context/recylox";
-import eyesIcon from '../../assets/eyesIcon.svg';
-import eyesOpenIcon from '../../assets/eyeOpenIcon.svg';
-import { useRecycle } from "../../context/recycle";
-import usersIcon from '../../assets/users.svg'
-import merchantIcon from '../../assets/merchant.svg'
-import tickIcon from '../../assets/tickIcon.svg'
 import { ethers } from "ethers";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import closeIcon from "../../assets/close.svg";
+import eyesOpenIcon from '../../assets/eyeOpenIcon.svg';
+import eyesIcon from '../../assets/eyesIcon.svg';
+import merchantIcon from '../../assets/merchant.svg';
+import tickIcon from '../../assets/tickIcon.svg';
+import usersIcon from '../../assets/users.svg';
+import CompanyDashboardLayout from "../../components/dashboard_components/CompanyDashboardLayout";
 import { useRecycleContract } from "../../context/RecycleContractProvider";
 import { useTokenContract } from "../../context/TokenProvider";
+import { CompanyDashboardData } from "../../data/DepositTransactionData";
+import { useAccount } from "wagmi";
 
 // validate plastic content
 const ValidatePlasticTab = ({ toggleClose,  }) => {
@@ -104,6 +103,7 @@ const ValidatePlasticTab = ({ toggleClose,  }) => {
 
 // pay picker tab
 const PayPickerTab = ({ toggleClose }) => {
+  const account = useAccount();
   const [loading, setLoading] = useState(false);
   const { account_category,  payPicker} = useRecycleContract();
   // const { isMethodCallLoading, isMethodCallSuccessful, payPicker} = useRecycle();
@@ -256,7 +256,7 @@ const TransferRecyloxTab = ({toggleClose, account_category}) => {
         })
       }
       else {
-        const transfer_amt = ethers.utils.parseEther(transferAmount);
+        const transfer_amt = parseInt(transferAmount);
         setLoading(true);
         await transferTokens(recipientAddress, transfer_amt);
         setLoading(false);
@@ -313,10 +313,8 @@ const CompanyDashboard = () => {
   {picker_count}
 
 
-
   const [componentToDisplay, setComponentToDisplay] = useState(0);
   const [toggleBalance, setToggleBalance] = useState(false);
-  const [balance, setBalance] = useState(0);
 
 
   // function to close nav content

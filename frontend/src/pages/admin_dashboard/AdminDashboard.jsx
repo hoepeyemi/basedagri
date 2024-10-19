@@ -1,31 +1,27 @@
 /* eslint-disable react/prop-types */
-import {useContext, useState} from 'react'
-import {Link} from "react-router-dom";
-import tickIcon from '../../assets/tickIcon.svg';
-import tickGreenIcon from '../../assets/tickGreenIcon.svg';
-import eyesIcon from '../../assets/eyesIcon.svg';
-import eyesOpenIcon from '../../assets/eyeOpenIcon.svg';
-import closeIcon from "../../assets/close.svg";
-import AdminDashboardLayout from '../../components/dashboard_components/AdminDashboardLayout';
-import { AdminDashboardData } from '../../data/AdminDashboardData';
-import { TokenContext, useToken } from '../../context/recylox';
 import { ethers } from 'ethers';
+import { useState } from 'react';
+import { Link } from "react-router-dom";
 import Swal from 'sweetalert2';
+import closeIcon from "../../assets/close.svg";
+import eyesOpenIcon from '../../assets/eyeOpenIcon.svg';
+import eyesIcon from '../../assets/eyesIcon.svg';
+import tickIcon from '../../assets/tickIcon.svg';
+import AdminDashboardLayout from '../../components/dashboard_components/AdminDashboardLayout';
+import { useRecycleContract } from '../../context/RecycleContractProvider';
+import { useTokenContract } from '../../context/TokenProvider';
+import { AdminDashboardData } from '../../data/AdminDashboardData';
 
 // mint token tab
 const MintTokenTab = ({toggleClose}) => {
 
-    const {mintSuccessful, mintLoading, mintTokens } = useToken();
-
+    const {mintTokens } = useTokenContract();
+    const [loading, setLoading] = useState(false);
     const [recipientAddress, setRecipientAddress] = useState('');
     const [mintAmount, setmintAmount] = useState(0);
     const [isMintChecked, setisMintChecked] = useState(false)
 
-    // const clearMintData = () => {
-    //     setRecipientAddress('')
-    //     setmintAmount(0)
-    //     setisMintChecked(false)
-    // }
+
     
     const mintToken = async () => {
         
@@ -69,8 +65,10 @@ const MintTokenTab = ({toggleClose}) => {
             })
         }
         else {
+            setLoading(true);
         const mint_amt = ethers.utils.parseEther(mintAmount)
-           mintTokens(recipientAddress, mint_amt);
+        await mintTokens(recipientAddress, mint_amt);
+        setLoading(false);
         }
 
     }
@@ -86,8 +84,7 @@ const MintTokenTab = ({toggleClose}) => {
     </div>
 
     {/* body */}
-    { 
-        !mintSuccessful ?
+
             <div className='w-[75%] mx-auto mt-[2rem] flex flex-col'>
                 {/* recipient's address */}
                 <label htmlFor="recipientAddress" className=' mb-0  text-[16px] font-[600]'>Recipient's Address</label>
@@ -117,25 +114,26 @@ const MintTokenTab = ({toggleClose}) => {
                     className="w-[5rem] border-2 border-white rounded-lg p-2 bg-[#158B5E] my-6 text-[0.7rem] font-[600]"
                     onClick={mintToken}
                 >
-                    {mintLoading ? "Loading..." : "Mint Token"}
+                    {loading ? "Loading..." : "Mint Token"}
                 </button>
             </div>
-        :
+        {/* :
             <div className='h-full transition-all duration-500 '>
                 <div className='w-[5rem] h-[5rem] mx-auto mt-[6rem] bg-white flex justify-center items-center rounded-full'>
                     <img src={tickGreenIcon} alt="succes-icon" className='w-[3.2rem] h-[3.2rem]' />
                 </div>
                 <h2 className='mt-[5.5rem] text-[1rem] font-[600] text-center'>Token Minted Successfully.</h2>
             </div>
-    }
+    } */}
     </div>
 }
 
 // transfer token tab
 const TransferTokenTab = ({toggleClose}) => {
 
-    const {transferTokensLoading, transferTokensSuccessful, transferTokens } = useToken();
+    const { transferTokens } = useTokenContract();
 
+    const [loading, setLoading] = useState(false);
     const [recipientAddress, setRecipientAddress] = useState('');
     const [transferAmount, setTransferAmount] = useState(0);
     const [isTransferChecked, setisTransferChecked] = useState(false);
@@ -182,8 +180,10 @@ const TransferTokenTab = ({toggleClose}) => {
             })
         }
         else {
+            setLoading(true);
             const transfer_amt = ethers.utils.parseEther(transferAmount)
            await transferTokens(recipientAddress, transfer_amt)
+            setLoading(false);
         }
     }
     
@@ -199,8 +199,7 @@ const TransferTokenTab = ({toggleClose}) => {
     </div>
 
     {/* body */}
-    { 
-        !transferTokensSuccessful ?
+
             <div className='w-[75%] mx-auto mt-[2rem] flex flex-col'>
                 {/* recipient's address */}
                 <label htmlFor="transferRecipientAddress" className=' mb-0  text-[16px] font-[600]'>Recipient's Address</label>
@@ -230,31 +229,32 @@ const TransferTokenTab = ({toggleClose}) => {
                     className="w-[10rem] border-2 border-white rounded-lg p-2 bg-[#158B5E] my-6 text-[0.7rem] font-[600]"
                     onClick={transferToken}
                 >
-                {transferTokensLoading ? "Loading..." : "Transfer Token"}
+                {loading ? "Loading..." : "Transfer Token"}
                 </button>
             </div>
-        :
+        {/* :
             <div className='h-full transition-all duration-500 '>
                 <div className='w-[5rem] h-[5rem] mx-auto mt-[6rem] bg-white flex justify-center items-center rounded-full'>
                     <img src={tickGreenIcon} alt="succes-icon" className='w-[3.2rem] h-[3.2rem]' />
                 </div>
                 <h2 className='mt-[5.5rem] text-[1rem] font-[600] text-center'>Token transferred Successfully.</h2>
             </div>
-    }
+    } */}
     </div>
 }
 
 // delegate token
 const DelegateTokenTab = ({toggleClose}) => {
 
-    const {transferFrom, transferFromLoading, transferFromSuccessful} = useToken()
+    const {transferFrom,} = useTokenContract()
 
+    const [loading, setLoading] = useState(false);
     const [senderAddress, setSenderAddress] = useState('');
     const [recipientAddress, setRecipient] = useState('');
     const [maxAmount, setMaxAmount] = useState(0);
     const [isApprovalChecked, setisApprovalChecked] = useState(false);
 
-    const TransferFrom =  () => {
+    const TransferFrom =  async() => {
 
         if (!senderAddress) {
             Swal.fire({
@@ -309,8 +309,10 @@ const DelegateTokenTab = ({toggleClose}) => {
             })
         }
         else {
+            setLoading(true)
             const max_amt = ethers.utils.parseEther(maxAmount)
-            transferFrom(senderAddress, recipientAddress, max_amt)
+            await transferFrom(senderAddress, recipientAddress, max_amt)
+            setLoading(false)
         }
     }
 
@@ -329,8 +331,7 @@ const DelegateTokenTab = ({toggleClose}) => {
             Ensure to check the details before you approve.
         </p>
      {/* body */}
-     { 
-        !transferFromSuccessful ?
+  
             <div className='w-[75%] mx-auto mt-[2rem] flex flex-col'>
                 {/* approver's address */}
                 <label htmlFor="approverAddress" className=' mb-0  text-[16px] font-[600]'>Sender Address</label>
@@ -366,29 +367,30 @@ const DelegateTokenTab = ({toggleClose}) => {
                     className="w-[10rem] border-2 border-white rounded-lg p-2 bg-[#158B5E] my-6 text-[0.7rem] font-[600]"
                     onClick={TransferFrom}
                 >
-                    {transferFromLoading ? "Loading..." : "Approve Token"}
+                    {loading ? "Loading..." : "Approve Token"}
                 </button>
             </div>
-        :
+        {/* :
             <div className='h-full transition-all duration-500 '>
                 <div className='w-[5rem] h-[5rem] mx-auto mt-[6rem] bg-white flex justify-center items-center rounded-full'>
                     <img src={tickGreenIcon} alt="succes-icon" className='w-[3.2rem] h-[3.2rem]' />
                 </div>
                 <h2 className='mt-[5.5rem] text-[1rem] font-[600] text-center'>Delegate Approval Successfully.</h2>
             </div>
-    }
+    } */}
     </div>
 }
 
 // burn token
 const BurnToken = ({toggleClose}) => {
 
-    const {burnTokenLoading, burnTokenSuccessful, burnTokens} = useToken();
+    const { burnTokens} = useTokenContract();
 
+    const [loading, setLoading] = useState(false);
     const [burnAmount, setBurnAmount] = useState(0);
     const [isBurnChecked, setisBurnChecked] = useState(false);
 
-    const burnToken = () => {
+    const burnToken = async() => {
         if (!burnAmount) {
             Swal.fire({
                 icon: 'error',
@@ -416,8 +418,10 @@ const BurnToken = ({toggleClose}) => {
             })
         }
         else {
+            setLoading(true)
             const burn_amt = ethers.utils.parseEther(burnAmount)
-            burnTokens(burn_amt)
+           await burnTokens(burn_amt)
+            setLoading(false)
         }
     }
 
@@ -432,8 +436,7 @@ const BurnToken = ({toggleClose}) => {
         </button>
     </div>
      {/* body */}
-     { 
-        !burnTokenSuccessful ?
+
             <div className='w-[75%] mx-auto mt-[2rem] flex flex-col'>
             
                 {/* amount to Burn */}
@@ -458,25 +461,26 @@ const BurnToken = ({toggleClose}) => {
                     className="w-[10rem] border-2 border-white rounded-lg p-2 bg-[#158B5E] my-6 text-[0.7rem] font-[600]"
                     onClick={burnToken}
                 >
-                    {burnTokenLoading ? "Loading..." : "Burn Token"}
+                    {loading ? "Loading..." : "Burn Token"}
                 </button>
             </div>
-        :
+        {/* :
             <div className='h-full transition-all duration-500 '>
                 <div className='w-[5rem] h-[5rem] mx-auto mt-[6rem] bg-white flex justify-center items-center rounded-full'>
                     <img src={tickGreenIcon} alt="succes-icon" className='w-[3.2rem] h-[3.2rem]' />
                 </div>
                 <h2 className='mt-[5.5rem] text-[1rem] font-[600] text-center'>Token Burnt Successfully!</h2>
             </div>
-    }
+    } */}
     </div>
 }
 
 const AdminDashboard = () => {
 
-    const { accountBalance, contract} = useContext(TokenContext);
+    const { accountBalance } = useTokenContract();
+    
 
-    const {picker_count,company_count} = useToken()
+    const {picker_count,company_count} = useRecycleContract()
 
     // Component to Display for dashboard
     const [componentToDisplay, setComponentToDisplay] = useState(0);
@@ -486,28 +490,15 @@ const AdminDashboard = () => {
     // function to close nav content
     const toggleCLose = () => {
         setComponentToDisplay(0);
-        window.location.reload();
     };
 
     const ToggleBalance = () => {
-        if (!contract) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Error!',
-                text: 'contract not initialized',
-                confirmButtonColor:"#006D44",
-                customClass: {
-                    icon: "font-montserrat",
-                    title: " font-montserrat text-[20px] text-[#000] font-[600]",
-                    text: "font-montserrat, text-[16px] text-[#000] font-[600]",
-                }
-            })
-        } else  {
+    
             setToggleBalance(!toggleBalance)
             const account_balance = ethers.utils.formatEther(accountBalance);
             setBalance(parseInt(account_balance).toFixed(2));
 
-        }
+        
     }
 
     return (

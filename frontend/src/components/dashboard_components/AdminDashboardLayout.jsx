@@ -1,17 +1,17 @@
-import Logo from '../logo';
-import menuIcon from '../../assets/menu-ic.svg'
 import { Link } from 'react-router-dom';
+import { useAccount } from 'wagmi';
+import menuIcon from '../../assets/menu-ic.svg';
+import searchIcon from '../../assets/search.svg';
 import { DashboardFooterData } from '../../data/DashboardFooterData';
-import searchIcon from '../../assets/search.svg'
-import { routes } from '../../routes/dashboard/admin.jsx'
-import { useRecycle } from '../../context/recycle';
-import { useToken } from '../../context/recylox';
+import { routes } from '../../routes/dashboard/admin.jsx';
+import { ADMIN_ADDRESS } from '../../utils.js';
+import Logo from '../logo';
 import Header from '../navigation/Header';
 
 const AdminDashboardLayout = ({dashboard_content, active_link}) => {
-  
-    const {connectedAccount} = useToken();
-    const admin_address = '0x1928062edfAFbCCb7D1C788B24F6aCdE80869048';
+    const account = useAccount();
+    const connectedAccount = account?.address || '';
+    const admin_address = ADMIN_ADDRESS
     const connected_account = connectedAccount.toLowerCase();
     const adm_address = admin_address.toLowerCase();
 
@@ -85,8 +85,8 @@ const AdminDashboardLayout = ({dashboard_content, active_link}) => {
     
             {/* dash board header */}
             <header className='my-4 border-black-700 flex flex-row justify-between items-center'>
-              <div className='w-46 h-46 items-center '>
-                <Link to={'/'}><Logo fill='#0D4D00' w='56' h='56' /></Link>
+              <div className='w-12 h-12 items-center '>
+                <Link to={'/'}><Logo  /></Link>
               </div>
               <div>
                 <h1 className='text-[1rem] md:text-[1rem] lg:text-[1.2rem] text-[#0D4D00] font-bold'>

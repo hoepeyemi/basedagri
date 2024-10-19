@@ -1,16 +1,14 @@
-import { useEffect, useState } from "react"
-import Logo from "../../components/logo"
-import RegistrationHeader from "../../components/navigation/RegistrationHeader"
-import { useRecycle } from "../../context/recycle";
+import { writeContract } from '@wagmi/core';
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useToken } from "../../context/recylox";
 import Swal from "sweetalert2";
-import { RECYCLE_CONTRACT } from "../../utils";
-import { recycleABI } from "../../context/recycle-abi";
-import { getConfig } from "../../../wagmi";
-import {  writeContract } from '@wagmi/core'
-import { useRecycleContract } from "../../context/RecycleContractProvider";
 import { useAccount } from "wagmi";
+import { getConfig } from "../../../wagmi";
+import Logo from "../../components/logo";
+import RegistrationHeader from "../../components/navigation/RegistrationHeader";
+import { recycleABI } from "../../context/recycle-abi";
+import { useRecycleContract } from "../../context/RecycleContractProvider";
+import { RECYCLE_CONTRACT } from "../../utils";
 const UserRegPage = () => {
 
   const { account_category }  =  useRecycleContract();
@@ -19,10 +17,7 @@ const UserRegPage = () => {
   const navigate = useNavigate()
   const connectedAccount = account?.address
 
-  // const {
-  //   registerPicker,  pickers, companies, 
-  //   isMethodCallLoading, isMethodCallSuccessful
-  // }  = useRecycle();
+
 
 
   const [userName, setUserName] = useState('');

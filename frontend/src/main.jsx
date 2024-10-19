@@ -1,23 +1,21 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
 import '@coinbase/onchainkit/styles.css';
-import './index.css'
-import {BrowserRouter} from "react-router-dom";
-import { RecycleProvider } from './context/recycle.jsx';
-import { WagmiProviders } from './providers/wagmi.jsx';
-import RecycloxTokenProvider from './context/TokenProvider.jsx';
-import { TokenProvider } from './context/recylox.jsx';
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { BrowserRouter } from "react-router-dom";
+import App from './App.jsx';
 import RecycleContractProvider from './context/RecycleContractProvider.jsx';
+import RecycloxTokenProvider from './context/TokenProvider.jsx';
+import './index.css';
+import { WagmiProviders } from './providers/wagmi.jsx';
 
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <WagmiProviders>
-  <TokenProvider>
+<RecycloxTokenProvider>
     <RecycleContractProvider>
-    <RecycloxTokenProvider>
-    <RecycleProvider>
+    
+
       <React.StrictMode>
    
         <BrowserRouter>
@@ -25,10 +23,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         </BrowserRouter>
      
       </React.StrictMode>
-    </RecycleProvider>
-    </RecycloxTokenProvider>
+
+  
     </RecycleContractProvider>
-  </TokenProvider>
+    </RecycloxTokenProvider>
+
 
   </WagmiProviders>
 )

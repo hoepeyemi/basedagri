@@ -1,12 +1,13 @@
 import { http, cookieStorage, createConfig, createStorage } from 'wagmi';
 import { base, baseSepolia } from 'wagmi/chains'; 
-import { coinbaseWallet } from 'wagmi/connectors';
+import { coinbaseWallet, metaMask } from 'wagmi/connectors';
  
 export function getConfig() {
   return createConfig({
     chains: [baseSepolia], 
-    multiInjectedProviderDiscovery:false,
+    multiInjectedProviderDiscovery:true,
     connectors: [
+      metaMask({ shimDisconnect: true }),
       coinbaseWallet({
         appName: "OnchainKit",
         preference: 'all',

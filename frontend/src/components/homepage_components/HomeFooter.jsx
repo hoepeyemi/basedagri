@@ -29,7 +29,7 @@ const HomeFooter = () => {
           </div>
 
           {/* resources */}
-          <div className="flex flex-col">
+          {/* <div className="flex flex-col">
             <p className="font-2 font-bold mb-4">Resources</p>
             <Link to={"/blog"} className="font-2 mb-4 font-extralight">
               Blog
@@ -40,15 +40,15 @@ const HomeFooter = () => {
             <Link to={"/privacy-policy"} className="font-2 mb-4 font-extralight">
               Privacy Policy
             </Link>
-          </div>
+          </div> */}
         </div>
 
         {/* contact us */}
         <div className="flex flex-col justify-center items-center mt-8 md:mt-0 md:justify-start md:items-start">
           <p className="font-2 font-bold mb-4 w-full text-center md:text-left">Contact Us</p>
-          <p className="font-2 mb-2 font-extralight">1881 SW 164th Avenue</p>
-          <p className="font-2 mb-4 font-extralight">Miramar, FL 33027, USA.</p>
-          <p className="font-2 font-extralight mb-4">info@grandida.com</p>
+          <p className="font-2 mb-2 font-extralight">57, Allen Avenue</p>
+          <p className="font-2 mb-4 font-extralight">Lagos, Nigeria.</p>
+          <p className="font-2 font-extralight mb-4">info@byteX.com</p>
         </div>
 
         {/* subscribe */}
