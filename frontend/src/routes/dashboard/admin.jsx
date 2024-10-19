@@ -45,29 +45,7 @@ const routes = [
         green_icon: notificationGreenIcon,
         id: 'dashboard-notifications',
     },
-    {
-        name: 'History',
-        path: '/admin-dashboard/history',
-        component: HistoryPage,
-        white_icon: historyWhiteIcon,
-        green_icon: historyGreenIcon,
-        id: "dashboard-history",
-    },
-    {
-        name: 'Offers',
-        path: '/admin-dashboard/offers',
-        component: OffersPage,
-        white_icon: offersWhiteIcon,
-        green_icon: offersGreenIcon,
-        id: "dashboard-offers",
-    },
-    {
-        name: "Chat",
-        path: '/admin-dashboard/chat',
-        white_icon: chatWhiteIcon,
-        green_icon: chatGreenIcon,
-        component: ChatPage
-    }
+ 
 ];
 
 const renderRoutes = (routes, basePath = '') => {

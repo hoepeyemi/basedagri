@@ -1,15 +1,15 @@
+import { ethers } from "ethers";
+import { CgSearch } from "react-icons/cg";
+import { TbArrowsRightLeft } from "react-icons/tb";
+import { TiArrowSortedDown } from "react-icons/ti";
+import copyIcon from '../../assets/copyIcon.svg';
 import stateGreen from "../../assets/stateGreen.svg";
 import stateRed from "../../assets/stateRed.svg";
-import { TbArrowsRightLeft } from "react-icons/tb";
-import { CgSearch } from "react-icons/cg";
-import { TiArrowSortedDown } from "react-icons/ti";
 import CompanyDashboardLayout from "../../components/dashboard_components/CompanyDashboardLayout";
-import { useToken } from "../../context/recylox";
-import { ethers } from "ethers";
-import copyIcon from '../../assets/copyIcon.svg';
 
-import Swal from "sweetalert2";
 import { useState } from "react";
+import Swal from "sweetalert2";
+import { useRecycleContract } from "../../context/RecycleContractProvider";
 
 const PaginatedContent = ({currentData}) => {
 
@@ -72,8 +72,8 @@ const PaginatedContent = ({currentData}) => {
                                 onClick={() => CopyText(transaction[2])}
                             />
                     </td>
-                        <td className="px-2 py-1 text-center ">{ethers.utils.formatEther(transaction[3].toString())} </td>
-                        <td className="px-2 py-1 text-center ">{ethers.utils.formatEther(transaction[4].toString())}</td>
+                        <td className="px-2 py-1 text-center ">{parseInt(transaction[3].toString())} KG </td>
+                        <td className="px-2 py-1 text-center ">{parseInt(transaction[3].toString()) * ethers.utils.formatEther(transaction[4].toString())}</td>
                         <td className="px-2 py-1 items-end text-right">
                         <ul>
                             {/* <li className="text-xs font-bold text-gray-500">{transaction.date}</li> */}
@@ -143,11 +143,12 @@ const PaginationControl = ({number_of_pages, current_page_no, set_current_page_n
 
 const CompanyTransactionHistory = () => {
 
-    const {companyTransactionHistory} = useToken();
+    const {companyTransactionHistory} = useRecycleContract();
 
     const [filterId, setFilterId] = useState('');
     
     const filteredTransactionData = companyTransactionHistory.filter((transaction) => {
+ 
         const transaction_id = transaction[0].toString();
         return transaction_id.includes(filterId)
     })

@@ -4,13 +4,13 @@ import arrowRight from '../../assets/arrowRight.svg'
 
 const faqData = [
     {
-        'title': "What are the rewards for earning Recylox?"
+        'title': "What are the rewards for earning Ecocollect?"
     },
     {
-        'title': "Is Recylox a secure and reliable platform?"
+        'title': "Is Ecocollect a secure and reliable platform?"
     },
     {
-        'title': "How does Recylox work?"
+        'title': "How does Ecocollect work?"
     }
 ]
 

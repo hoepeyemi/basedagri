@@ -1,16 +1,12 @@
-import { useRef, useState } from 'react';
-import Logo from '../logo';
-import menuIcon from '../../assets/menu-ic.svg'
 import { Link } from 'react-router-dom';
-import { UserDashboardNavData } from '../../data/DashboardData';
-import { DashboardFooterData } from '../../data/DashboardFooterData';
-import searchIcon from '../../assets/search.svg'
-import Deposit from '../../pages/company_dashboard/Deposit';
-import { routes } from '../../routes/dashboard/user.jsx'
-import { useToken } from '../../context/recylox';
-import Header from '../navigation/Header';
 import { useAccount } from 'wagmi';
+import menuIcon from '../../assets/menu-ic.svg';
+import searchIcon from '../../assets/search.svg';
 import { useRecycleContract } from '../../context/RecycleContractProvider.jsx';
+import { DashboardFooterData } from '../../data/DashboardFooterData';
+import { routes } from '../../routes/dashboard/user.jsx';
+import Logo from '../logo';
+import Header from '../navigation/Header';
 
 const UserDashboardLayout = ({dashboard_content, active_link}) => {
 
@@ -87,8 +83,8 @@ const UserDashboardLayout = ({dashboard_content, active_link}) => {
 
           {/* dash board header */}
           <header className='my-4 border-black-700 flex flex-row justify-between items-center'>
-            <div className='w-46 h-46 items-center '>
-              <Link to={'/'}><Logo fill='#0D4D00' w='56' h='56' /></Link>
+            <div className='w-12 h-12 items-center '>
+              <Link to={'/'}><Logo /></Link>
             </div>
             <div>
               <h1 className='text-[1rem] md:text-[1rem] lg:text-[1.2rem] text-[#0D4D00] font-bold'>

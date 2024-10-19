@@ -6,18 +6,24 @@ import { writeContract, readContract } from '@wagmi/core'
 import { recycleABI } from "./recycle-abi";
 import { getConfig } from "../../wagmi";
 import Swal from "sweetalert2";
+import { useTokenContract } from "./TokenProvider";
+import { ethers } from "ethers";
 
 
 export const RecycleContractContext = createContext()
 export const useRecycleContract = () => useContext(RecycleContractContext);
 const RecycleContractProvider = ({children}) => {
+
   const account = useAccount()
+  const {approveTokens} = useTokenContract()
   // const [companyTransactionHistory, setCompanyTransactionHistory] = useState([])
   // const [pickerTransactionHistory, setPickerTransactionHistory] = useState([])
 
 
 
-  const {data, error, isLoading, refetch} = useReadContracts({
+  const {data, error, isLoading,  refetch} = useReadContracts(
+    {
+      config: getConfig(),
     contracts: [
       {
         address: RECYCLE_CONTRACT,
@@ -30,10 +36,13 @@ const RecycleContractProvider = ({children}) => {
         functionName: "getRegisteredCompanyCount",
       },
       {
-        address: RECYCLE_CONTRACT,
-        abi: recycleABI,
+        address: RECYCLE_TOKEN_CONTRACT,
+        abi: recyloxABI,
         functionName: "balanceOf",
+        args: [account?.address],
+
       },
+      
       {
         address: RECYCLE_CONTRACT,
         abi: recycleABI,
@@ -51,6 +60,13 @@ const RecycleContractProvider = ({children}) => {
         functionName: "getCompany",
         args:[account?.address]
       },
+
+      {
+        address: RECYCLE_CONTRACT,
+        abi: recycleABI,
+        functionName: "getAllCompanies",
+       
+      }
     
     
     
@@ -62,26 +78,19 @@ const RecycleContractProvider = ({children}) => {
     refetch()
   }, [account?.address, refetch])
   
-
  const picker_count  = data?.[0].result || 0
 const company_count = data?.[1].result || 0
 const tokenHolderBalance = data?.[2].result || 0
 const totalTransaction = data?.[3].result || 0
 const picker = data?.[4].result || null
 const company = data?.[5].result || null
-let account_category 
-console.log({
-  picker_count,
-  company_count,
-  tokenHolderBalance,
-  totalTransaction,
-  picker,
-  company,
-})
-if(picker && picker?.name){
+const companies = data?.[6].result || []
+let account_category = ""
+
+if(picker && picker?.pickerAddress?.toLowerCase() === account?.address?.toLowerCase()){
   account_category = "picker"
 }
-if(company && company?.name){
+if(company && company?.companyAddress?.toLowerCase() === account?.address?.toLowerCase()){
   account_category = "company"
 }
 let pickerTransactionHistory = []
@@ -96,38 +105,39 @@ if (data && !error){
     }).then((result) => {
       const company_address = result[1].toLowerCase();
         const picker_address = result[2].toLowerCase();
-        if (company_address === account?.address ) {
-    companyTransactionHistory.push(result);
+
+        if (company_address === account?.address?.toLocaleLowerCase() ) {
+        companyTransactionHistory.push(result);
         }
-        if ( account?.address) {
+        if (picker_address === account?.address?.toLocaleLowerCase()) {
           pickerTransactionHistory.push(result)
         }
-      console.log(`transaction struct ${index} => `, result);
+     
+
     }).catch((error) => {
       console.error('Failed to fetch transaction details:', error);
     })
     
-
-    // const company_address = transaction[1].toLowerCase();
-    // const picker_address = transaction[2].toLowerCase();
-    // const connected_account = _connectedAccount.toLowerCase();
-
-    // console.log("addresses to lower case => ", company_address, picker_address, connected_account);
-
-    // // check if connected address matches any of the companies address
-    // if (company_address === connected_account ) {
-    //   companyTransactionHistory.push(transaction);
-    // }
-
-    // // check if connected address matches any of the companies address
-    // if (picker_address === connected_account) {
-    //   pickerTransactionHistory.push(transaction);
-    // }
   }  // ends transaction loop
 
 }
+
 const payPicker = useCallback(async (transactionId) => {
   try {
+
+    const transactionToPayFor = await readContract(getConfig(), {
+      abi: recycleABI,
+      address: RECYCLE_CONTRACT,
+      functionName: 'transactions',
+      args: [transactionId],
+    })
+
+  const weight = BigInt(transactionToPayFor[3])
+  const price = BigInt(transactionToPayFor[4])
+  const amount = BigInt((weight * price))
+
+ const res = await approveTokens(RECYCLE_CONTRACT, ethers.utils.parseUnits(amount.toString()))
+
     const result = await writeContract( 
       getConfig(), {
       account: account?.address,
@@ -136,7 +146,7 @@ const payPicker = useCallback(async (transactionId) => {
       address: RECYCLE_CONTRACT,
       functionName: 'payPicker',
       args: [
-        transactionId
+        parseInt(transactionId)
       ],
     })
   
@@ -232,7 +242,7 @@ const validatePlastic = useCallback(async (transactionId) => {
       address: RECYCLE_CONTRACT,
       functionName: 'validatePlastic',
       args: [
-        transactionId
+        parseInt(transactionId)
       ],
     })
   
@@ -280,6 +290,7 @@ const validatePlastic = useCallback(async (transactionId) => {
       company_count,
       tokenHolderBalance,
       totalTransaction,
+      companies,
       payPicker,
       validatePlastic,
       depositPlastic

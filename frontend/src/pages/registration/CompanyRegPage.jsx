@@ -1,16 +1,15 @@
-import { useState } from 'react';
-import Logo from '../../components/logo';
-import { useRecycle } from '../../context/recycle';
-import RegistrationHeader from '../../components/navigation/RegistrationHeader';
-import { RECYCLE_CONTRACT, useToken } from '../../context/recylox';
+import { writeContract } from '@wagmi/core';
 import { ethers } from 'ethers';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import {  writeContract } from '@wagmi/core'
-import { recycleABI } from '../../context/recycle-abi';
 import { useAccount } from 'wagmi';
 import { getConfig } from '../../../wagmi';
-import { useNavigate } from 'react-router-dom';
+import Logo from '../../components/logo';
+import RegistrationHeader from '../../components/navigation/RegistrationHeader';
+import { recycleABI } from '../../context/recycle-abi';
 import { useRecycleContract } from '../../context/RecycleContractProvider';
+import { RECYCLE_CONTRACT } from '../../utils';
 
 const CompanyRegPage = () => {
 
@@ -111,7 +110,7 @@ const RegisterCompany = async() => {
   }
   else {
     try {
-      const minWt = ethers.utils.parseEther(minimumWeightRequirement)
+      const minWt = parseInt(minimumWeightRequirement)
       const maxPrice =ethers.utils.parseEther(maximumWeightPerKg)
       const result = await writeContract(
         
@@ -141,7 +140,7 @@ const RegisterCompany = async() => {
               text: "font-montserrat, text-[16px] text-[#000] font-[600]",
           }
         })
-        navigate('/home')
+        navigate('/company-dashboard')
       }
     } catch (error) {
       console.log(error)

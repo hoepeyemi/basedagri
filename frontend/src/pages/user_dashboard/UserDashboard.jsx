@@ -1,17 +1,15 @@
-import {useContext, useState} from 'react'
-import UserDashboardLayout from '../../components/dashboard_components/UserDashboardLayout'
-import {DepositTransaction} from "../../data/DepositTransactionData";
-import {Link} from "react-router-dom";
-import tickIcon from '../../assets/tickIcon.svg';
+import { ethers } from 'ethers';
+import { useState } from 'react';
+import { Link } from "react-router-dom";
+import Swal from 'sweetalert2';
+import closeIcon from "../../assets/close.svg";
 import eyesOpenIcon from '../../assets/eyeOpenIcon.svg';
 import eyesIcon from '../../assets/eyesIcon.svg';
-import closeIcon from "../../assets/close.svg";
-import { ethers } from 'ethers';
-import { TokenContext } from '../../context/recylox';
-import { useRecycle } from '../../context/recycle';
-import Swal from 'sweetalert2'
+import tickIcon from '../../assets/tickIcon.svg';
+import UserDashboardLayout from '../../components/dashboard_components/UserDashboardLayout';
 import { useRecycleContract } from '../../context/RecycleContractProvider';
 import { useTokenContract } from '../../context/TokenProvider';
+import { DepositTransaction } from "../../data/DepositTransactionData";
 
 // deposit plastic content
 const DepositPlasticTab = ({ toggleClose }) => {
@@ -61,7 +59,7 @@ const DepositPlasticTab = ({ toggleClose }) => {
               })
         } else {
             setLoading(true);
-            const plastic_weight = ethers.utils.parseEther(plasticWeight)
+            const plastic_weight = Math.floor(Number(plasticWeight))
           await  depositPlastic(companyAddress, plastic_weight)
             setLoading(false);
             // if (isMethodCallSuccessful) {
@@ -117,7 +115,6 @@ const TransactionTab = ({ toggleClose }) => {
 
     const {pickerTransactionHistory} = useRecycleContract();
 
-
     // set toggle state
 
     return (<>
@@ -136,7 +133,7 @@ const TransactionTab = ({ toggleClose }) => {
       </div>
       <div className="w-full md:w-1/2 lg:w-1/4 items-center p-1">
           <div className="font-sans font-bold uppercase text-black text-[12px]">TOTAL WEIGHT</div>
-          <div className="text-green-800 text-[10px]">{ethers.utils.formatUnits(item[3])} KG</div>
+          <div className="text-green-800 text-[10px]">{parseInt(item[3])} KG</div>
       </div>
       <div className="w-full md:w-1/2 lg:w-1/4 items-center p-1">
           <div className="font-sans font-bold uppercase text-black text-[12px]">TRANSACTION ID</div>

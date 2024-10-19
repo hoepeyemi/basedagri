@@ -153,7 +153,7 @@ const HistoryPage = () => {
                   <tbody>
                     <tr className="text-primary40 text-xs md:text-lg font-extrabold">
                       <td className="px-2 py-1 text-center ">{ethers.utils.formatEther(transaction[4])}</td>
-                      <td className="px-2 py-1 text-center ">{ethers.utils.formatUnits(transaction[3])} KG</td>
+                      <td className="px-2 py-1 text-center ">{parseInt(transaction[3])} KG</td>
                       <td className="px-2 py-1 text-center ">{parseInt(transaction[0])}</td>
                       <td className="px-2 py-1 text-center ">{transaction[1]}</td>
                       <td className="px-2 py-1 items-end text-right">

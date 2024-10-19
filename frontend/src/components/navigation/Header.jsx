@@ -1,14 +1,13 @@
-import { useContext, useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { MdClose } from "react-icons/md";
 import { Link, useLocation } from "react-router-dom";
-import dropdown from '../../assets/dropdown.svg'
-import Logo from '../logo'
-import { TokenContext } from '../../context/recylox'
-import menuIcon from '../../assets/menuGreen.svg'
-import { HeaderData } from '../../data/HeaderData'
-import { MdClose } from "react-icons/md"
-import ConnectWalletButton from "../connections/connect_button";
 import { useAccount } from "wagmi";
+import dropdown from '../../assets/dropdown.svg';
+import menuIcon from '../../assets/menuGreen.svg';
 import { useRecycleContract } from "../../context/RecycleContractProvider";
+import { HeaderData } from '../../data/HeaderData';
+import ConnectWalletButton from "../connections/connect_button";
+import Logo from '../logo';
 
 const Header = () => {
   const account = useAccount()
