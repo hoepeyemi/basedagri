@@ -91,4 +91,15 @@ describe("Lock", function () {
       .withArgs(owner.address, name, minWeightRequirement, maxPricePerKg, active);
     });
   });
+
+  describe("Tests", function () {
+    // it("Should get companies addresses", async () => {
+    //   const [owner, acc1] = await ethers.getSigners();
+
+    //   const recycle = await loadFixture(deployContract);
+    //   const addresses = [];
+
+    //   expect(await recycle.recycle.companyAddresses([])).length.to.be.equal(addresses.length);
+    // });
+  });
 });
