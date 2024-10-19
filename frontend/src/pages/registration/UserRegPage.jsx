@@ -170,11 +170,11 @@ const UserRegPage = () => {
             {/* <div className='w-[10rem] md:w-[22rem] lg:w-[29rem] min-h-[34rem] bg-[#F8F9FB] border border-primary40-700'> */}
             <div className='w-[10rem] md:w-[22rem] lg:min-w-[29rem] min-h-[34rem] bg-[#F8F9FB] border border-primary40-700'>
               <div className='flex flex-row mt-10 ml-10'>
-                <div className='w-46 h-46 items-center '>
-                  <Logo fill='#0D4D00' w='46' h='46' />
+                <div className='w-12 h-12 items-center '>
+                  <Logo/>
                 </div>
                 <p className='text-[1rem] md:text-[1rem] lg:text-[1.2rem] mt-2 ml-3 text-[#0D4D00]  text-center'>
-                  Recylox
+                Ecocollect
                 </p>
               </div>
               <div className='ml-8'>

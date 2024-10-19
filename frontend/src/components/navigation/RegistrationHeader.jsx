@@ -67,7 +67,6 @@ const Header = () => {
         {/* logo */}
         <div className="w-12 h-12">
           <Link to={"/"}>
-            {" "}
             <Logo />
           </Link>
         </div>
