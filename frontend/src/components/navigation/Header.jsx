@@ -63,7 +63,7 @@ const Header = () => {
         </div>
 
         <div className="w-full flex flex-row items-center justify-end md:justify-center">
-          <div className="flex flex-row gap-2 justify-between items-center w-fit">
+          <div className="w-full flex flex-row gap-2 justify-between items-center">
             {/* header links */}
             <ul
                className={`w-full absolute items-center md:static flex flex-col md:flex-row gap-2 lg:gap-[66px] px-4
