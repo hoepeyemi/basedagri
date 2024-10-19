@@ -21,6 +21,7 @@ By bridging decentralized technology with real-world environmental efforts, EcoC
 - **Hardhat**: Used to compile, deploy, and manage the smart contracts on the Base Sepolia testnet.
 - **React**: To build the interactive frontend interface.
 - ***OnChainKit***: For seamless on-chain interactions with the smart contracts.
+- ***Coinbase Wallet***: Used for easy connection of wallet interaction.
 - **Tailwind CSS**: To design a responsive and visually appealing frontend.
 - ***Base Sepolia Testnet***: The blockchain environment where the contracts are deployed and tested.
 
@@ -109,22 +110,19 @@ The frontend will be available at `http://localhost:5173`.
 ## Screenshots
 
 1. **Home Page**  
-   ![Home Page](path-to-image-1)
+   ![Home Page](./images/cover.png)
    
 2. **About Us Page**  
-   ![About Us Page](path-to-image-2)
+   ![Admin Dashboard](./images/admin.png)
 
 3. **Contact Us Page**  
-   ![Contact Us Page](path-to-image-3)
+   ![Company Dashboard](./images/company.png)
 
 4. **Picker Dashboard**  
-   ![Picker Dashboard](path-to-image-4)
+   ![Picker Dashboard](./images/userdashboard.png)
 
 5. **Company Dashboard**  
-   ![Company Dashboard](path-to-image-5)
-
-6. **Company Dashboard**  
-   ![Company Dashboard](path-to-image-6)
+   ![Company Transaction Dashboard](./images/company_transaction.png)
 
 ## contributors
 1. Abdulyekeen Lukman
