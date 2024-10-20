@@ -8,12 +8,13 @@ import { useRecycleContract } from "../../context/RecycleContractProvider";
 import { HeaderData } from '../../data/HeaderData';
 import ConnectWalletButton from "../connections/connect_button";
 import Logo from '../logo';
+import { ADMIN_ADDRESS } from "../../utils";
 
 const Header = () => {
   const account = useAccount()
   const connectedAccount = account?.address
   const {account_category } = useRecycleContract()
-  const adminAddress = '';
+  const adminAddress = ADMIN_ADDRESS;
   console.log("account_category =>", account_category)
   // const account_category = '';
 
@@ -127,7 +128,7 @@ const Header = () => {
                         <Link to={"/company-dashboard"}>Dashboard</Link>
                     </li>
                 :
-                connectedAccount &&  connectedAccount === adminAddress ?
+                connectedAccount && account_category === "admin" &&   connectedAccount.toLocaleLowerCase() === adminAddress.toLocaleLowerCase()  ?
                     <li className={`w-fit mr-4 hover:border-b hover:border-primary40 my-4 hover:font-bold transition-all border-primary40 ${pathname == "/admin-dashboard" ? "border-b font-bold" : "font-normal"}`}>
                         <Link to={"/admin-dashboard"}>Dashboard</Link>
                     </li>
