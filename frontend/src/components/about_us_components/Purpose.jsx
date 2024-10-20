@@ -4,17 +4,6 @@ import handInAboutPage from './../../assets/handInAboutPage.png';
 const Purpose = () => {
   return (
     <div className="m-[auto] w-[900px] py-16">
-      <p className="font-sans w-[1000px]  ">
-        At Recylox, we are revolutionizing the way we address the global plastic
-        incentivizes individuals to take action by collecting waste plastics and
-        rewards them with tokens. By partnering with leading plastic recycling
-        companies, we ensure that these collected plastics are repurposed and
-        recycled, contributing to a sustainable future.
-        <span className="bg-[#005232] text-white"> Our mission </span> is to
-        create a cleaner and greener future by encouraging individuals to
-        recycle through our innovative platform and rewarding them with our
-        exclusive cryptocurrency token, Recylox.
-      </p>
       <div className="flex items-center justify-between gap-4">
         <div>
           
@@ -24,11 +13,8 @@ const Purpose = () => {
         
           <div className="mt-[20px]">
           <ol className=' w-[500px]'>
-            <span className="text-[#005232] text-xl">
-              At the core of our company are the following values:
-            </span>
             <li>
-              <span className="text-[#005232] font-bold text-lg">
+              <span className="text-[#005232] text-lg">
                 Environmental Stewardship:
               </span>
               We are committed to protecting our planet and conserving its

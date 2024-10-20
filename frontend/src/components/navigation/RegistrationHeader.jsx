@@ -72,7 +72,7 @@ const Header = () => {
         </div>
 
         <div className="w-full flex flex-row items-center justify-end md:justify-center">
-          <div className="flex flex-row justify-between items-center w-fit">
+          <div className="flex flex-row justify-between items-center w-full">
             {/* header links */}
             <ul
               className={`w-full absolute items-center md:static flex flex-col md:flex-row gap-2 lg:gap-[66px] px-4
@@ -107,11 +107,11 @@ const Header = () => {
                     className={`w-fit hover:border-b hover:border-primary40 hover:font-bold transition-all flex flex-row gap-2 my-4 border-primary40 md:mr-4 ${pathname == "/how-it-works" ? "border-b font-bold" : "font-normal"}`}
                    >How It Works
                   </Link>
-                  <Link 
+                  {/* <Link 
                     to={'/privacy-policy'}
                     className={`w-fit hover:border-b hover:border-primary40 hover:font-bold transition-all flex flex-row gap-2 my-4 border-primary40 md:mr-4 ${pathname == "/privacy-policy" ? "border-b font-bold" : "font-normal"}`}
                     >Privacy Policy
-                    </Link>
+                    </Link> */}
                 </div>
                 </div>
                 : ""

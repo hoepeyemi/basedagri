@@ -12,7 +12,7 @@ const HowItWorks = () => {
           {/* header */}
             <div className=" flex flex-col items-center text-center justify-center">
                 <h1 className="text-[2.5rem] font-[800] text-white">HOW IT WORKS</h1>
-                <h1 className="text-primary40 bg-white text-[2rem] font-[600] mt-4">RECYCLING AND EARNING WITH RECYLOX</h1>
+                <h1 className="text-primary40 bg-white text-[2rem] font-[600] mt-4">Recycling and Earning with EcoCollect</h1>
             </div>
             <img src={howItWorksImage} alt="how-it-works image"
                 className="h-[28rem] w-[29rem]"
