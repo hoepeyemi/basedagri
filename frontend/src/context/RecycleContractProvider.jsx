@@ -1,6 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useState } from "react"
 import { useAccount, useReadContracts } from "wagmi";
-import { RECYCLE_CONTRACT, RECYCLE_TOKEN_CONTRACT } from "../utils";
+import { ADMIN_ADDRESS, RECYCLE_CONTRACT, RECYCLE_TOKEN_CONTRACT } from "../utils";
 import { recyloxABI } from "./recylox-abi";
 import { writeContract, readContract } from '@wagmi/core'
 import { recycleABI } from "./recycle-abi";
@@ -85,7 +85,7 @@ const totalTransaction = data?.[3].result || 0
 const picker = data?.[4].result || null
 const company = data?.[5].result || null
 const companies = data?.[6].result || []
-let account_category = ""
+let account_category =  account?.address?.toLocaleLowerCase() === ADMIN_ADDRESS?.toLocaleLowerCase()? "admin":""
 
 if(picker && picker?.pickerAddress?.toLowerCase() === account?.address?.toLowerCase()){
   account_category = "picker"
