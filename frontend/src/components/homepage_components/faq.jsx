@@ -4,13 +4,13 @@ import arrowRight from '../../assets/arrowRight.svg'
 
 const faqData = [
     {
-        'title': "What are the rewards for earning Ecocollect?"
+        'title': "What are the rewards for earning Basearpsagric?"
     },
     {
-        'title': "Is Ecocollect a secure and reliable platform?"
+        'title': "Is Basearpsagric a secure and reliable platform?"
     },
     {
-        'title': "How does Ecocollect work?"
+        'title': "How does Basearpsagric work?"
     }
 ]
 

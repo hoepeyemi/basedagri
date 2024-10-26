@@ -7,7 +7,7 @@ const Footer = () => {
       {/* border text content */}
       <div className="relative flex flex-col p-4 w-full justify-center bg-white md:flex-row">
         <p className=" text-sm font-neutral font-extralight text-center md:text-base">
-          Copyright 2024 EcoCollect | All Rights Reserved
+          Copyright 2024 Basearpsagric | All Rights Reserved
         </p>
       </div>
     </footer>

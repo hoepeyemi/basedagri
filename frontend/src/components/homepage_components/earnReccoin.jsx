@@ -18,11 +18,11 @@ export function EarnReccoinReward() {
                
                <p className="mb-8 mt-16 md:mb-0 md:h-[300px] text-[#005232] text-[16px]
                     font-montserrat font-[700]">
-                Earn Ecocollect tokens for every item you recycle through <br /> 
-                our waste management system. From plastic bottles to <br />
-                paper and rubber, each contribution counts towards <br />
+                Earn Basearpsagric tokens for every farm produce you sell <br /> 
+                our preservation system. From tubers, grains to <br />
+                Fibre and Oils, each contribution counts towards <br />
                 building a more sustainable future. <br /> 
-                The more you recycle, the more Ecocollect you earn!
+                The more you farm, the more Basearpsagric you earn!
                </p>
 
                 <Link to={'/user-dashboard'} 

@@ -46,9 +46,9 @@ const HomeFooter = () => {
         {/* contact us */}
         <div className="flex flex-col justify-center items-center mt-8 md:mt-0 md:justify-start md:items-start">
           <p className="font-2 font-bold mb-4 w-full text-center md:text-left">Contact Us</p>
-          <p className="font-2 mb-2 font-extralight">57, Allen Avenue</p>
-          <p className="font-2 mb-4 font-extralight">Lagos, Nigeria.</p>
-          <p className="font-2 font-extralight mb-4">info@byteX.com</p>
+          <p className="font-2 mb-2 font-extralight">57, Bodilon Avenue</p>
+          <p className="font-2 mb-4 font-extralight">Silicon VAlley, San Francisco.</p>
+          <p className="font-2 font-extralight mb-4">info@basearpsagric.com</p>
         </div>
 
         {/* subscribe */}

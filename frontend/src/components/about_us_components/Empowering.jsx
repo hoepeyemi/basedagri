@@ -19,7 +19,7 @@ const Empowering = () => {
       vector: lightSVG,
       topic: "I.R.A",
       content:
-        "(Innovative Recycling Approach) We take a fresh approach to recycling by integrating technology and cryptocurrency into the traditional recycling ecosystem. Our platform provides users with a seamless and convenient way to recycle various materials, transforming it into a rewarding experience. Through our user-friendly mobile application, individuals can track their recycling progress, earn EcoCollect tokens, and contribute to a sustainable future.",
+        "(Innovative Recycling Approach) We take a fresh approach to recycling by integrating technology and cryptocurrency into the traditional recycling ecosystem. Our platform provides users with a seamless and convenient way to recycle various materials, transforming it into a rewarding experience. Through our user-friendly mobile application, individuals can track their recycling progress, earn Basearpsagric tokens, and contribute to a sustainable future.",
     },
     {
       vector: recycleSVG,
@@ -41,7 +41,7 @@ const Empowering = () => {
         </div>
       ),
       content:
-        "At EcoCollect, we believe in recognizing and incentivizing individuals for their recycling efforts. Every time you recycle, you earn EcoCollect tokens, our exclusive cryptocurrency. These tokens can be redeemed for various rewards, including discounts at partner stores, exclusive merchandise, and even charitable donations. By aligning economic benefits with environmental action, we motivate individuals to embrace recycling as a rewarding habit.",
+        "At EcoCollect, we believe in recognizing and incentivizing individuals for their recycling efforts. Every time you recycle, you earn Basearpsagri tokens, our exclusive cryptocurrency. These tokens can be redeemed for various rewards, including discounts at partner stores, exclusive merchandise, and even charitable donations. By aligning economic benefits with environmental action, we motivate individuals to embrace recycling as a rewarding habit.",
     },
     {
       vector: HandSVG,

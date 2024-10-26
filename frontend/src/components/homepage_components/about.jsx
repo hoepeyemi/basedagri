@@ -46,18 +46,17 @@ const About = () => {
             )
           } */}
           <p className='mb-8'>We are passionate about making a difference in 
-            the world by revolutionizing waste management and 
-            promoting sustainability. Our mission is to empower 
-            individuals to turn their waste into wealth while making 
-            a positive impact on the planet.
+            the world by revolutionizing buy and 
+sell of farm priduce,            promoting sustainability. Our mission is to empower 
+            mainly farmers to turn their farm produce into wealth while making 
+            a positive impact on the Continent.
           </p>
 
           <p>Through innovative solutions and cutting-edge technology, 
           we have developed a comprehensive rewards-based system that 
-          incentivizes recycling and encourages responsible waste disposal. 
+          incentivizes farming and encourages responsible farming. 
           By participating in our program, individuals can earn valuable 
-          rewards for their recycling efforts, ranging from discounts at 
-          local businesses to vouchers for eco-friendly products.
+          rewards for their farming efforts.
           </p>
           
         </div>
