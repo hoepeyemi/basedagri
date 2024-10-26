@@ -88,7 +88,7 @@ const UserDashboardLayout = ({dashboard_content, active_link}) => {
             </div>
             <div>
               <h1 className='text-[1rem] md:text-[1rem] lg:text-[1.2rem] text-[#000000] font-bold'>
-                USER DASHBOARD
+                FARMER DASHBOARD
               </h1>
             </div>
             {/* search box */}
