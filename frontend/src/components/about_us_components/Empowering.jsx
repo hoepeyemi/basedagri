@@ -13,7 +13,7 @@ const Empowering = () => {
       vector: settingSVG,
       topic: "Our Expertise",
       content:
-        "With years of experience in the recycling industry, our team at EcoCollect possesses a deep understanding of waste management practices, recycling techniques, and market dynamics. We leverage this expertise to develop solutions that streamline recycling processes, improve efficiency, and maximize the impact of recycling efforts.",
+        "With years of experience in the recycling industry, our team at Basearpsagric possesses a deep understanding of waste management practices, recycling techniques, and market dynamics. We leverage this expertise to develop solutions that streamline recycling processes, improve efficiency, and maximize the impact of recycling efforts.",
     },
     {
       vector: lightSVG,
@@ -30,7 +30,7 @@ const Empowering = () => {
         </div>
       ),
       content:
-        "By recycling with EcoCollect, you become an active participant in reducing waste and preserving our environment. Each item you recycle translates into reduced landfill waste, decreased pollution, and conservation of natural resources. Through our advanced waste management techniques and partnerships with recycling facilities, we ensure that your efforts have a significant and measurable impact on our planet.",
+        "By recycling with Basearpsagric, you become an active participant in reducing waste and preserving our environment. Each item you recycle translates into reduced landfill waste, decreased pollution, and conservation of natural resources. Through our advanced waste management techniques and partnerships with recycling facilities, we ensure that your efforts have a significant and measurable impact on our planet.",
     },
     {
       vector: DollarSVG,
@@ -41,7 +41,7 @@ const Empowering = () => {
         </div>
       ),
       content:
-        "At EcoCollect, we believe in recognizing and incentivizing individuals for their recycling efforts. Every time you recycle, you earn Basearpsagri tokens, our exclusive cryptocurrency. These tokens can be redeemed for various rewards, including discounts at partner stores, exclusive merchandise, and even charitable donations. By aligning economic benefits with environmental action, we motivate individuals to embrace recycling as a rewarding habit.",
+        "At Basearpsagric, we believe in recognizing and incentivizing individuals for their recycling efforts. Every time you recycle, you earn Basearpsagri tokens, our exclusive cryptocurrency. These tokens can be redeemed for various rewards, including discounts at partner stores, exclusive merchandise, and even charitable donations. By aligning economic benefits with environmental action, we motivate individuals to embrace recycling as a rewarding habit.",
     },
     {
       vector: HandSVG,
@@ -52,7 +52,7 @@ const Empowering = () => {
         </div>
       ),
       content:
-        "At EcoCollect, we prioritize trust and transparency in all our operations. We adhere to strict ethical and environmental standards, ensuring that your recyclables are processed responsibly and efficiently. Our blockchain-based system provides immutable records, guaranteeing the integrity of transactions and reinforcing trust between our users, partners, and our company.",
+        "At Basearpsagric, we prioritize trust and transparency in all our operations. We adhere to strict ethical and environmental standards, ensuring that your recyclables are processed responsibly and efficiently. Our blockchain-based system provides immutable records, guaranteeing the integrity of transactions and reinforcing trust between our users, partners, and our company.",
     },
   ];
 

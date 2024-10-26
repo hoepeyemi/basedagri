@@ -93,13 +93,13 @@ const RegisterCompany = async() => {
     })
   }
   // else if (!isActive) {
-  //   alert("Agree to EcoCollect Terms")
+  //   alert("Agree to Basearpsagric Terms")
   // }
   else if (!isTermsChecked) {
     Swal.fire({
       icon: 'error',
       title: 'Error!',
-      text: 'Agree to EcoCollect Terms',
+      text: 'Agree to Basearpsagric Terms',
       confirmButtonColor:"#006D44",
       customClass: {
           icon: "font-montserrat",
@@ -238,7 +238,7 @@ const RegisterCompany = async() => {
                     aria-label='Checkbox for following text input'
                   />
                   <p className='text-[0.5rem] md:text-[0.7rem] lg:text-[0.7rem] mt-2 w-[14rem]  text-[#0D4D00]'>
-                    I agree to the terms of the EcoCollect Subscriber Agreement and
+                    I agree to the terms of the Basearpsagric Subscriber Agreement and
                     the Privacy Policy
                   </p>
                 </div>

@@ -20,7 +20,7 @@ const AboutUsAndEarnRecoin = () => {
             </div>
            <div className="mt-20 w-[50%] md:mt-0">
             <button className={ `ml-0 md:ml-6 font-montserrat font-black text-lg flex flex-row items-center  border rounded-[10px] px-12 py-2 bg-primary40 text-white`  }>
-                    <img src={earnReccoinWhiteIcon} alt="earn Ecocollect icon" className="mr-4" />Earn Basearpsagric Token
+                    <img src={earnReccoinWhiteIcon} alt="earn Basearpsagric icon" className="mr-4" />Earn Basearpsagric Token
                 </button>
                 <EarnReccoinReward/>
            </div>

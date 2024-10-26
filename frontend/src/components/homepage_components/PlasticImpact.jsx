@@ -22,7 +22,7 @@ const PlasticImpact = () => {
                 and oceans each year. However, plastic recycling offers a
                 sustainable solution that not only mitigates the detrimental
                 impact of plastic waste but also helps conserve valuable natural
-                resources. At Ecocollect, we believe in the power of collective
+                resources. At Basearpsagric, we believe in the power of collective
                 action, and by participating in our platform, you can contribute
                 to the positive change our planet desperately needs.
               </p>
@@ -144,7 +144,7 @@ const PlasticImpact = () => {
               for generations to come.
             </p>
             <p className="font-openSans pb-2">
-              Start making an impact today with Ecocollect!
+              Start making an impact today with Basearpsagric!
             </p>
           </div>
         </div>

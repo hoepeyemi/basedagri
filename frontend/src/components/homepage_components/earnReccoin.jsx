@@ -5,7 +5,7 @@ import reccoin_reward from "../../assets/reccoin_reward.png";
 export default function EarnReccoin() {
     return <div className="bg-white w-full items-center pt-[95px] pb-[110px] px-4">
         <p className="text-primary60 text-[4.3125rem] font-semibold">
-            Earn <br />Ecocollect
+            Earn <br />Basearpsagric
         </p>
         <img src={reccoinBox} alt="reccoin box" className="w-[398.99px] h-[344.56px]" />
     </div>

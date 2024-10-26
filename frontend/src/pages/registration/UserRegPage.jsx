@@ -95,7 +95,7 @@ const UserRegPage = () => {
       Swal.fire({
         icon: 'error',
         title: 'Error!',
-        text: 'Agree to EcoCollect Terms',
+        text: 'Agree to Basearpsagric Terms',
         confirmButtonColor:"#006D44",
         customClass: {
             icon: "font-montserrat",
@@ -174,7 +174,7 @@ const UserRegPage = () => {
                   <Logo/>
                 </div>
                 <p className='text-[1rem] md:text-[1rem] lg:text-[1.2rem] mt-2 ml-3 text-[#0D4D00]  text-center'>
-                Ecocollect
+                Basearpsagric
                 </p>
               </div>
               <div className='ml-8'>
@@ -220,7 +220,7 @@ const UserRegPage = () => {
                   aria-label='Checkbox for following text input'
                 />
                 <p className='text-[0.5rem] md:text-[0.7rem] lg:text-[0.7rem] mt-2 w-[14rem]  text-[#0D4D00]'>
-                  I agree to the terms of the EcoCollect Subscriber Agreement and
+                  I agree to the terms of the Basearpsagric Subscriber Agreement and
                   the Privacy Policy
                 </p>
               </div>

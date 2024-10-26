@@ -1,6 +1,6 @@
 import { buildModule } from "@nomicfoundation/hardhat-ignition/modules";
 
-const ContractsModule = buildModule("EcoCollectModule", (m) => {
+const ContractsModule = buildModule("BasearpsagricModule", (m) => {
 
   const name = "EcoToken";
   const symbol = "ETK";
