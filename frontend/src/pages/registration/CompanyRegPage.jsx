@@ -180,7 +180,7 @@ const RegisterCompany = async() => {
                     <Logo />
                   </div>
                   <p className='text-[1rem] md:text-[1rem] lg:text-[1.2rem] mt-2 ml-3 text-[#0D4D00]  text-center'>
-                    Ecocollect
+                    Basearpsagric
                   </p>
                 </div>
                 <div className='ml-8'>

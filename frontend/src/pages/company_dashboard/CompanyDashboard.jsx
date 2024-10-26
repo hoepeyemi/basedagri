@@ -352,7 +352,7 @@ const CompanyDashboard = () => {
                   <img src={toggleBalance ? eyesOpenIcon : eyesIcon} alt="eyes-icon" className='h-4 w-4 ml-4 hover:cursor-pointer' onClick={() =>  setToggleBalance(!toggleBalance)} />
                 </div>
                 {/* balance */}
-                <h1 className='text-[#0D4D00] text-[1.6rem] font-[700] font-montserrat my-4'>{toggleBalance ? `${ethers.utils.formatEther(tokenHolderBalance)} REC` : "XXXXX"}</h1>
+                <h1 className='text-[#000000] text-[1.6rem] font-[700] font-montserrat my-4'>{toggleBalance ? `${ethers.utils.formatEther(tokenHolderBalance)} REC` : "XXXXX"}</h1>
                 {/* pickers div */}
               </div>
              

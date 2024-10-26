@@ -31,7 +31,7 @@ const UserDashboardLayout = ({dashboard_content, active_link}) => {
         {/* left sidebar */}
         <aside
           id='default-sidebar'
-          className='absolute w-[20%] h-full left-0 z-40 bg-[#0D4D00] items-center border-2 border-[#0D4D00] overflow-y-scroll transition-transform -translate-x-full sm:translate-x-0 mb-20'
+          className='absolute w-[20%] h-full left-0 z-40 bg-[#000000] items-center border-2 border-[#000000] overflow-y-scroll transition-transform -translate-x-full sm:translate-x-0 mb-20'
           aria-label='Sidebar'
         >
           <div className='p-4 absolute left-12'>
@@ -87,7 +87,7 @@ const UserDashboardLayout = ({dashboard_content, active_link}) => {
               <Link to={'/'}><Logo /></Link>
             </div>
             <div>
-              <h1 className='text-[1rem] md:text-[1rem] lg:text-[1.2rem] text-[#0D4D00] font-bold'>
+              <h1 className='text-[1rem] md:text-[1rem] lg:text-[1.2rem] text-[#000000] font-bold'>
                 USER DASHBOARD
               </h1>
             </div>

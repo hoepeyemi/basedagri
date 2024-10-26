@@ -15,7 +15,7 @@ import {
 const ConnectWalletButton = () => {
   return (
 <Wallet>
-        <ConnectWallet className="bg-primary40 hover:bg-[#006D44] hover:scale-105  transition-all ">
+        <ConnectWallet className="bg-primary40 hover:bg-[#ffffff] hover:scale-105  transition-all ">
           <Avatar className="h-6 w-6" />
           <Name />
         </ConnectWallet>
@@ -23,7 +23,7 @@ const ConnectWalletButton = () => {
           <Identity className="px-4 pt-3 pb-2" hasCopyAddressOnClick>
             <Avatar />
             <Name />
-            <Address className={"text-[#006D44]"}/>
+            <Address className={"text-[#ffffff]"}/>
           </Identity>
           <WalletDropdownDisconnect />
         </WalletDropdown>
